@@ -1,0 +1,55 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="button-group">
+                    <button *ngIf="authService.hasRole('ROLE_ADMIN')" routerLink="/dashboard/empleado/form" type="submit"
+                        class="btn waves-effect waves-light btn-primary">Crear</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Cedula</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Correo</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Direccion</th>
+                                <th>Celular</th>
+                                <th>Vacunado</th>
+                                <th colspan="2" class="text-nowrap">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of empleados">
+                                <td>{{item.empleadoId}}</td>
+                                <td>{{item.cedula}}</td>
+                                <td>{{item.nombres}}</td>
+                                <td>{{item.apellidos}}</td>
+                                <td>{{item.correo}}</td>
+                                <td>{{item.fechaNacimiento}}</td>
+                                <td>{{item.direccion}}</td>
+                                <td>{{item.celular}}</td>
+                                <td>{{item.vacunado}}</td>
+                                <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button
+                                        [routerLink]="['/dashboard/empleado/form', item.cedula]" type="submit"
+                                        class="btn waves-effect waves-light btn-xs btn-secondary">Editar</button></td>
+                                <td *ngIf="authService.hasRole('ROLE_ADMIN')"><button (click)="delete(item)"
+                                        type="submit"
+                                        class="btn waves-effect waves-light btn-xs btn-danger">Eliminar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
