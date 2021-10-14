@@ -41,12 +41,12 @@ public class Movilizacion implements Serializable {
 
 	// bi-directional many-to-one association to Auto
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "auto_id")
+	@JoinColumn(name = "auto_id", nullable = false)
 	private Auto auto;
 
 	// bi-directional many-to-one association to Restriccion
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "restriccion_id")
+	@JoinColumn(name = "restriccion_id", nullable = false)
 	private Restriccion restriccion;
 
 	public Movilizacion() {

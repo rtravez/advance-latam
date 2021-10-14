@@ -39,12 +39,12 @@ public class Auto implements Serializable {
 
 	// bi-directional many-to-one association to Marca
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "marca_id")
+	@JoinColumn(name = "marca_id", nullable = false)
 	private Marca marca;
 
 	// bi-directional many-to-one association to Tipo
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipo_id")
+	@JoinColumn(name = "tipo_id", nullable = false)
 	private Tipo tipo;
 
 	// bi-directional many-to-one association to Movilizacion

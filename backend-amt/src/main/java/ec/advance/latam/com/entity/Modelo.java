@@ -34,7 +34,7 @@ public class Modelo implements Serializable {
 
 	// bi-directional many-to-one association to Marca
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "marca_id")
+	@JoinColumn(name = "marca_id", nullable = false)
 	private Marca marca;
 
 	public Modelo() {
