@@ -13,6 +13,7 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the roles database table.
+ * 
  */
 @Entity
 @Table(name = "roles")
@@ -20,11 +21,9 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	// @SequenceGenerator(name = "ROLES_ROLID_GENERATOR", sequenceName = "ROL_ID")
-	// @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ROLES_ROLID_GENERATOR")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rol_id", unique = true, nullable = false)
-	private Long rolId;
+	private Integer rolId;
 
 	@Column(nullable = false)
 	private Boolean estado;
@@ -37,14 +36,13 @@ public class Role implements Serializable {
 	private List<RolesUsuario> rolesUsuarios;
 
 	public Role() {
-		super();
 	}
 
-	public Long getRolId() {
+	public Integer getRolId() {
 		return this.rolId;
 	}
 
-	public void setRolId(Long rolId) {
+	public void setRolId(Integer rolId) {
 		this.rolId = rolId;
 	}
 

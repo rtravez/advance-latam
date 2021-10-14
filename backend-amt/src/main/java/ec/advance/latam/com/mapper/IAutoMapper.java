@@ -27,8 +27,8 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-import ec.advance.latam.com.dto.EmpleadoDto;
-import ec.advance.latam.com.entity.Empleado;
+import ec.advance.latam.com.dto.AutoDto;
+import ec.advance.latam.com.entity.Auto;
 
 /**
  * <b> Descripcion de la clase, interface o enumeracion. </b>
@@ -37,18 +37,17 @@ import ec.advance.latam.com.entity.Empleado;
  * @version $1.0$
  */
 @Mapper
-public interface IEmpleadoMapper {
+public interface IAutoMapper {
 
-	@Mapping(target = "usuarioDto", source = "usuario")
-	@Mapping(target = "empleadosVacunaDtos", source = "empleadosVacunas")
-	public EmpleadoDto empleadoToEmpleadoDto(Empleado empleado);
+	@Mapping(target = "marcaDto", source = "marca")
+	@Mapping(target = "tipoDto", source = "tipo")
+	@Mapping(target = "movilizacionDtos", source = "movilizaciones")
+	public AutoDto autoToAutoDto(Auto auto);
 
-	@Mapping(target = "usuario", source = "usuarioDto")
-	@Mapping(target = "empleadosVacunas", source = "empleadosVacunaDtos")
-	public Empleado empleadoDtoToEmpleado(EmpleadoDto empleadoDto);
+	public Auto autoDtoToAuto(AutoDto autoDto);
 
-	public List<EmpleadoDto> listEmpleadoToListEmpleadoDto(List<Empleado> empleados);
+	public List<AutoDto> listAutoToListAutoDto(List<Auto> autos);
 
-	public List<Empleado> listEmpleadoDtoToListEmpleado(List<EmpleadoDto> empleadoDtos);
+	public List<Auto> listAutoDtoToListAuto(List<AutoDto> autoDtos);
 
 }

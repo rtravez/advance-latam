@@ -3,26 +3,26 @@ package ec.advance.latam.com.dto;
 import java.io.Serializable;
 import java.util.List;
 
-public class RoleDto implements Serializable {
+public class TipoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer rolId;
+	private Integer tipoId;
 
 	private Boolean estado;
 
 	private String nombre;
 
-	private List<RolesUsuarioDto> rolesUsuarioDtos;
+	private List<AutoDto> autoDtos;
 
-	public RoleDto() {
+	public TipoDto() {
 	}
 
-	public Integer getRolId() {
-		return rolId;
+	public Integer getTipoId() {
+		return tipoId;
 	}
 
-	public void setRolId(Integer rolId) {
-		this.rolId = rolId;
+	public void setTipoId(Integer tipoId) {
+		this.tipoId = tipoId;
 	}
 
 	public Boolean getEstado() {
@@ -41,12 +41,11 @@ public class RoleDto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<RolesUsuarioDto> getRolesUsuarioDtos() {
-		return rolesUsuarioDtos;
+	public List<AutoDto> getAutoDtos() {
+		return autoDtos;
 	}
 
-	public void setRolesUsuarioDtos(List<RolesUsuarioDto> rolesUsuarioDtos) {
-		this.rolesUsuarioDtos = rolesUsuarioDtos;
+	public void setAutoDtos(List<AutoDto> autoDtos) {
+		this.autoDtos = autoDtos;
 	}
-
 }

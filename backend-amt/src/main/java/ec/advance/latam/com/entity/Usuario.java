@@ -3,7 +3,6 @@ package ec.advance.latam.com.entity;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the usuarios database table.
+ * 
  */
 @Entity
 @Table(name = "usuarios")
@@ -23,87 +23,54 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "usuario_id", unique = true, nullable = false)
-	private Long usuarioId;
-
-	@Column(nullable = false, length = 60)
-	private String password;
+	private Integer usuarioId;
 
 	@Column(nullable = false)
 	private Boolean enabled;
 
+	@Column(nullable = false, length = 60)
+	private String password;
+
 	@Column(nullable = false, length = 20)
 	private String username;
 
-	// bi-directional many-to-one association to Empleado
-	@OneToMany(mappedBy = "usuario")
-	private List<Empleado> empleados;
-
 	// bi-directional many-to-one association to RolesUsuario
-	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "usuario")
 	private List<RolesUsuario> rolesUsuarios;
 
 	public Usuario() {
 	}
 
-	public Usuario(String username, String password, Boolean enabled) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
-
-	public Long getUsuarioId() {
+	public Integer getUsuarioId() {
 		return this.usuarioId;
 	}
 
-	public void setUsuarioId(Long usuarioId) {
+	public void setUsuarioId(Integer usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public Boolean getEnabled() {
-		return enabled;
+		return this.enabled;
 	}
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getUsername() {
-		return username;
+		return this.username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public List<Empleado> getEmpleados() {
-		return this.empleados;
-	}
-
-	public void setEmpleados(List<Empleado> empleados) {
-		this.empleados = empleados;
-	}
-
-	public Empleado addEmpleado(Empleado empleado) {
-		getEmpleados().add(empleado);
-		empleado.setUsuario(this);
-
-		return empleado;
-	}
-
-	public Empleado removeEmpleado(Empleado empleado) {
-		getEmpleados().remove(empleado);
-		empleado.setUsuario(null);
-
-		return empleado;
 	}
 
 	public List<RolesUsuario> getRolesUsuarios() {

@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
+
 public class BackendAmtApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BackendAmtApplication.class);
