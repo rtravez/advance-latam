@@ -6,7 +6,7 @@ import java.util.List;
 public class UsuarioDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer usuarioId;
+	private Long usuarioId;
 
 	private Boolean enabled;
 
@@ -19,7 +19,7 @@ public class UsuarioDto implements Serializable {
 	public UsuarioDto() {
 	}
 
-	public Integer getUsuarioId() {
+	public Long getUsuarioId() {
 		return this.usuarioId;
 	}
 
@@ -55,7 +55,7 @@ public class UsuarioDto implements Serializable {
 		this.rolesUsuarioDtos = rolesUsuarioDtos;
 	}
 
-	public void setUsuarioId(Integer usuarioId) {
+	public void setUsuarioId(Long usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 

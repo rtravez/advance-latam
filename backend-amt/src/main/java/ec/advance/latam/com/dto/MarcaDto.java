@@ -6,7 +6,7 @@ import java.util.List;
 public class MarcaDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer marcaId;
+	private Long marcaId;
 
 	private Boolean estado;
 
@@ -17,11 +17,11 @@ public class MarcaDto implements Serializable {
 	public MarcaDto() {
 	}
 
-	public Integer getMarcaId() {
+	public Long getMarcaId() {
 		return marcaId;
 	}
 
-	public void setMarcaId(Integer marcaId) {
+	public void setMarcaId(Long marcaId) {
 		this.marcaId = marcaId;
 	}
 

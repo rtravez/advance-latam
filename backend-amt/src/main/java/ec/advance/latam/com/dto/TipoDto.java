@@ -6,7 +6,7 @@ import java.util.List;
 public class TipoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer tipoId;
+	private Long tipoId;
 
 	private Boolean estado;
 
@@ -17,11 +17,11 @@ public class TipoDto implements Serializable {
 	public TipoDto() {
 	}
 
-	public Integer getTipoId() {
+	public Long getTipoId() {
 		return tipoId;
 	}
 
-	public void setTipoId(Integer tipoId) {
+	public void setTipoId(Long tipoId) {
 		this.tipoId = tipoId;
 	}
 

@@ -6,7 +6,7 @@ import java.util.List;
 public class AutoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer autoId;
+	private Long autoId;
 
 	private String chasis;
 
@@ -23,11 +23,11 @@ public class AutoDto implements Serializable {
 	public AutoDto() {
 	}
 
-	public Integer getAutoId() {
+	public Long getAutoId() {
 		return autoId;
 	}
 
-	public void setAutoId(Integer autoId) {
+	public void setAutoId(Long autoId) {
 		this.autoId = autoId;
 	}
 

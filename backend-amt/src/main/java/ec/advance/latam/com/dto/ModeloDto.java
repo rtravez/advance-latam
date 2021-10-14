@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class ModeloDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer modeloId;
+	private Long modeloId;
 
 	private Boolean estado;
 
@@ -16,11 +16,11 @@ public class ModeloDto implements Serializable {
 	public ModeloDto() {
 	}
 
-	public Integer getModeloId() {
+	public Long getModeloId() {
 		return modeloId;
 	}
 
-	public void setModeloId(Integer modeloId) {
+	public void setModeloId(Long modeloId) {
 		this.modeloId = modeloId;
 	}
 

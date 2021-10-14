@@ -84,4 +84,15 @@ public class AutoService implements IAutoService {
 			throw new ExceptionManager().new GettingException("Error al guardar el registro");
 		}
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager {
+		try {
+			return autoDao.findAutoByPlaca(placa);
+		} catch (Exception e) {
+			LOG.error("findAutoByPlaca: ", e);
+			throw new ExceptionManager().new FindingException("Error al buscar el registro");
+		}
+	}
 }

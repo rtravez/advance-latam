@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class RolesUsuarioDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer rolUsuarioId;
+	private Long rolUsuarioId;
 
 	private Boolean estado;
 
@@ -16,11 +16,11 @@ public class RolesUsuarioDto implements Serializable {
 	public RolesUsuarioDto() {
 	}
 
-	public Integer getRolUsuarioId() {
+	public Long getRolUsuarioId() {
 		return rolUsuarioId;
 	}
 
-	public void setRolUsuarioId(Integer rolUsuarioId) {
+	public void setRolUsuarioId(Long rolUsuarioId) {
 		this.rolUsuarioId = rolUsuarioId;
 	}
 

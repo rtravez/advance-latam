@@ -6,7 +6,7 @@ import java.util.Date;
 public class MovilizacionDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Integer movilizacionId;
+	private Long movilizacionId;
 
 	private Boolean estado;
 
@@ -27,11 +27,11 @@ public class MovilizacionDto implements Serializable {
 		this.restriccionDto = restriccionDto;
 	}
 
-	public Integer getMovilizacionId() {
+	public Long getMovilizacionId() {
 		return movilizacionId;
 	}
 
-	public void setMovilizacionId(Integer movilizacionId) {
+	public void setMovilizacionId(Long movilizacionId) {
 		this.movilizacionId = movilizacionId;
 	}
 
