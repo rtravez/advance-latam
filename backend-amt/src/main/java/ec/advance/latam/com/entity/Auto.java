@@ -26,7 +26,7 @@ public class Auto implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "auto_id", unique = true, nullable = false)
-	private Integer autoId;
+	private Long autoId;
 
 	@Column(nullable = false, length = 255)
 	private String chasis;
@@ -54,11 +54,11 @@ public class Auto implements Serializable {
 	public Auto() {
 	}
 
-	public Integer getAutoId() {
+	public Long getAutoId() {
 		return this.autoId;
 	}
 
-	public void setAutoId(Integer autoId) {
+	public void setAutoId(Long autoId) {
 		this.autoId = autoId;
 	}
 

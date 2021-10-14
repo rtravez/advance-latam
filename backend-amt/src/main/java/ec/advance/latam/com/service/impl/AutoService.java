@@ -1,12 +1,14 @@
 package ec.advance.latam.com.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.advance.latam.com.dao.IAutoDao;
@@ -36,4 +38,50 @@ public class AutoService implements IAutoService {
 		}
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public boolean existsById(Long id) throws ExceptionManager {
+		try {
+			return autoDao.existsById(id);
+		} catch (Exception e) {
+			LOG.error("existsById: ", e);
+			throw new ExceptionManager().new FindingException("Error al buscar el registro");
+		}
+
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Auto> findById(Long id) throws ExceptionManager {
+		try {
+			return autoDao.findById(id);
+		} catch (Exception e) {
+			LOG.error("findById: ", e);
+			throw new ExceptionManager().new FindingException("Error al buscar el registro");
+		}
+
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
+	public void delete(Auto auto) throws ExceptionManager {
+		try {
+			autoDao.delete(auto);
+		} catch (Exception e) {
+			LOG.error("delete: ", e);
+			throw new ExceptionManager().new GettingException("Error al eliminar el registro");
+		}
+
+	}
+
+	@Override
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
+	public void save(Auto auto) throws ExceptionManager {
+		try {
+			autoDao.save(auto);
+		} catch (Exception e) {
+			LOG.error("save: ", e);
+			throw new ExceptionManager().new GettingException("Error al guardar el registro");
+		}
+	}
 }

@@ -27,7 +27,7 @@ public class Movilizacion implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "movilizacion_id", unique = true, nullable = false)
-	private Integer movilizacionId;
+	private Long movilizacionId;
 
 	@Column(nullable = false)
 	private Boolean estado;
@@ -52,11 +52,11 @@ public class Movilizacion implements Serializable {
 	public Movilizacion() {
 	}
 
-	public Integer getMovilizacionId() {
+	public Long getMovilizacionId() {
 		return this.movilizacionId;
 	}
 
-	public void setMovilizacionId(Integer movilizacionId) {
+	public void setMovilizacionId(Long movilizacionId) {
 		this.movilizacionId = movilizacionId;
 	}
 

@@ -14,7 +14,17 @@ public class MovilizacionDto implements Serializable {
 
 	private AutoDto autoDto;
 
+	private RestriccionDto restriccionDto;
+
 	public MovilizacionDto() {
+	}
+
+	public RestriccionDto getRestriccionDto() {
+		return restriccionDto;
+	}
+
+	public void setRestriccionDto(RestriccionDto restriccionDto) {
+		this.restriccionDto = restriccionDto;
 	}
 
 	public Integer getMovilizacionId() {

@@ -24,7 +24,7 @@ public class Modelo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "modelo_id", unique = true, nullable = false)
-	private Integer modeloId;
+	private Long modeloId;
 
 	@Column(nullable = false)
 	private Boolean estado;
@@ -40,11 +40,11 @@ public class Modelo implements Serializable {
 	public Modelo() {
 	}
 
-	public Integer getModeloId() {
+	public Long getModeloId() {
 		return this.modeloId;
 	}
 
-	public void setModeloId(Integer modeloId) {
+	public void setModeloId(Long modeloId) {
 		this.modeloId = modeloId;
 	}
 

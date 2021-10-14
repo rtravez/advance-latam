@@ -24,7 +24,7 @@ public class Tipo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tipo_id", unique = true, nullable = false)
-	private Integer tipoId;
+	private Long tipoId;
 
 	@Column(nullable = false)
 	private Boolean estado;
@@ -39,11 +39,11 @@ public class Tipo implements Serializable {
 	public Tipo() {
 	}
 
-	public Integer getTipoId() {
+	public Long getTipoId() {
 		return this.tipoId;
 	}
 
-	public void setTipoId(Integer tipoId) {
+	public void setTipoId(Long tipoId) {
 		this.tipoId = tipoId;
 	}
 

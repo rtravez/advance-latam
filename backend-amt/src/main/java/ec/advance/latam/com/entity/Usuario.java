@@ -24,7 +24,7 @@ public class Usuario implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "usuario_id", unique = true, nullable = false)
-	private Integer usuarioId;
+	private Long usuarioId;
 
 	@Column(nullable = false)
 	private Boolean enabled;
@@ -42,11 +42,11 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Integer getUsuarioId() {
+	public Long getUsuarioId() {
 		return this.usuarioId;
 	}
 
-	public void setUsuarioId(Integer usuarioId) {
+	public void setUsuarioId(Long usuarioId) {
 		this.usuarioId = usuarioId;
 	}
 
