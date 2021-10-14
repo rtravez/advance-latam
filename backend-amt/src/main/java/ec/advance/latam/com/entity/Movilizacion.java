@@ -36,10 +36,18 @@ public class Movilizacion implements Serializable {
 	@Column(nullable = false)
 	private Date fecha;
 
+	@Column(nullable = false, length = 255)
+	private String descripcion;
+
 	// bi-directional many-to-one association to Auto
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "auto_id")
 	private Auto auto;
+
+	// bi-directional many-to-one association to Restriccion
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "restriccion_id")
+	private Restriccion restriccion;
 
 	public Movilizacion() {
 	}
