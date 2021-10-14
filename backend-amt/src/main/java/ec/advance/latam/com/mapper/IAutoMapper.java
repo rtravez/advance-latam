@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import ec.advance.latam.com.dto.AutoDto;
 import ec.advance.latam.com.entity.Auto;
@@ -36,14 +37,19 @@ import ec.advance.latam.com.entity.Auto;
  * @author renetravez
  * @version $1.0$
  */
-@Mapper
+@Mapper(implementationName = "AutoMapper", implementationPackage = "<PACKAGE_NAME>.impl")
 public interface IAutoMapper {
+
+	IAutoMapper INSTANCE = Mappers.getMapper(IAutoMapper.class);
 
 	@Mapping(target = "marcaDto", source = "marca")
 	@Mapping(target = "tipoDto", source = "tipo")
 	@Mapping(target = "movilizacionDtos", source = "movilizaciones")
 	public AutoDto autoToAutoDto(Auto auto);
 
+	@Mapping(target = "marca", source = "marcaDto")
+	@Mapping(target = "tipo", source = "tipoDto")
+	@Mapping(target = "movilizaciones", source = "movilizacionDtos")
 	public Auto autoDtoToAuto(AutoDto autoDto);
 
 	public List<AutoDto> listAutoToListAutoDto(List<Auto> autos);
