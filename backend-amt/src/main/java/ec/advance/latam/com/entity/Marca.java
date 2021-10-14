@@ -32,10 +32,6 @@ public class Marca implements Serializable {
 	@Column(nullable = false, length = 255)
 	private String nombre;
 
-	// bi-directional many-to-one association to Auto
-	@OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
-	private List<Auto> autos;
-
 	// bi-directional many-to-one association to Modelo
 	@OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
 	private List<Modelo> modelos;
@@ -44,7 +40,7 @@ public class Marca implements Serializable {
 	}
 
 	public Long getMarcaId() {
-		return this.marcaId;
+		return marcaId;
 	}
 
 	public void setMarcaId(Long marcaId) {
@@ -52,7 +48,7 @@ public class Marca implements Serializable {
 	}
 
 	public Boolean getEstado() {
-		return this.estado;
+		return estado;
 	}
 
 	public void setEstado(Boolean estado) {
@@ -60,55 +56,19 @@ public class Marca implements Serializable {
 	}
 
 	public String getNombre() {
-		return this.nombre;
+		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public List<Auto> getAutos() {
-		return this.autos;
-	}
-
-	public void setAutos(List<Auto> autos) {
-		this.autos = autos;
-	}
-
-	public Auto addAuto(Auto auto) {
-		getAutos().add(auto);
-		auto.setMarca(this);
-
-		return auto;
-	}
-
-	public Auto removeAuto(Auto auto) {
-		getAutos().remove(auto);
-		auto.setMarca(null);
-
-		return auto;
-	}
-
 	public List<Modelo> getModelos() {
-		return this.modelos;
+		return modelos;
 	}
 
 	public void setModelos(List<Modelo> modelos) {
 		this.modelos = modelos;
-	}
-
-	public Modelo addModelo(Modelo modelo) {
-		getModelos().add(modelo);
-		modelo.setMarca(this);
-
-		return modelo;
-	}
-
-	public Modelo removeModelo(Modelo modelo) {
-		getModelos().remove(modelo);
-		modelo.setMarca(null);
-
-		return modelo;
 	}
 
 }

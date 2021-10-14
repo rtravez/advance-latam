@@ -37,10 +37,10 @@ public class Auto implements Serializable {
 	@Column(nullable = false, length = 10)
 	private String placa;
 
-	// bi-directional many-to-one association to Marca
+	// bi-directional many-to-one association to Modelo
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "marca_id", nullable = false)
-	private Marca marca;
+	@JoinColumn(name = "modelo_id", nullable = false)
+	private Modelo modelo;
 
 	// bi-directional many-to-one association to Tipo
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -86,12 +86,12 @@ public class Auto implements Serializable {
 		this.placa = placa;
 	}
 
-	public Marca getMarca() {
-		return this.marca;
+	public Modelo getModelo() {
+		return modelo;
 	}
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
+	public void setModelo(Modelo modelo) {
+		this.modelo = modelo;
 	}
 
 	public Tipo getTipo() {

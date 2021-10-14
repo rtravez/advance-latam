@@ -14,7 +14,7 @@ public class AutoDto implements Serializable {
 
 	private String placa;
 
-	private MarcaDto marcaDto;
+	private ModeloDto modeloDto;
 
 	private TipoDto tipoDto;
 
@@ -55,12 +55,12 @@ public class AutoDto implements Serializable {
 		this.placa = placa;
 	}
 
-	public MarcaDto getMarcaDto() {
-		return marcaDto;
+	public ModeloDto getModeloDto() {
+		return modeloDto;
 	}
 
-	public void setMarcaDto(MarcaDto marcaDto) {
-		this.marcaDto = marcaDto;
+	public void setModeloDto(ModeloDto modeloDto) {
+		this.modeloDto = modeloDto;
 	}
 
 	public TipoDto getTipoDto() {

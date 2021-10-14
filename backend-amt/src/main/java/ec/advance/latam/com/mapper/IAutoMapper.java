@@ -42,12 +42,12 @@ public interface IAutoMapper {
 
 	IAutoMapper INSTANCE = Mappers.getMapper(IAutoMapper.class);
 
-	@Mapping(target = "marcaDto", source = "marca")
+	@Mapping(target = "modeloDto", source = "modelo")
 	@Mapping(target = "tipoDto", source = "tipo")
 	@Mapping(target = "movilizacionDtos", source = "movilizaciones")
 	public AutoDto autoToAutoDto(Auto auto);
 
-	@Mapping(target = "marca", source = "marcaDto")
+	@Mapping(target = "modelo", source = "modeloDto")
 	@Mapping(target = "tipo", source = "tipoDto")
 	@Mapping(target = "movilizaciones", source = "movilizacionDtos")
 	public Auto autoDtoToAuto(AutoDto autoDto);

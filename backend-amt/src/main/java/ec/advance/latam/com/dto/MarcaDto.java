@@ -12,8 +12,6 @@ public class MarcaDto implements Serializable {
 
 	private String nombre;
 
-	private List<AutoDto> autoDtos;
-
 	private List<ModeloDto> modeloDtos;
 
 	public MarcaDto() {
@@ -41,14 +39,6 @@ public class MarcaDto implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<AutoDto> getAutoDtos() {
-		return autoDtos;
-	}
-
-	public void setAutoDtos(List<AutoDto> autoDtos) {
-		this.autoDtos = autoDtos;
 	}
 
 	public List<ModeloDto> getModeloDtos() {
