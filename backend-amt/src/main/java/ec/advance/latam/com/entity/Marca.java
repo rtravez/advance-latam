@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,11 +33,11 @@ public class Marca implements Serializable {
 	private String nombre;
 
 	// bi-directional many-to-one association to Auto
-	@OneToMany(mappedBy = "marca")
+	@OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
 	private List<Auto> autos;
 
 	// bi-directional many-to-one association to Modelo
-	@OneToMany(mappedBy = "marca")
+	@OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
 	private List<Modelo> modelos;
 
 	public Marca() {

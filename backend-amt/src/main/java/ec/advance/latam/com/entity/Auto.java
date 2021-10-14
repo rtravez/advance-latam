@@ -48,7 +48,7 @@ public class Auto implements Serializable {
 	private Tipo tipo;
 
 	// bi-directional many-to-one association to Movilizacion
-	@OneToMany(mappedBy = "auto")
+	@OneToMany(mappedBy = "auto", fetch = FetchType.LAZY)
 	private List<Movilizacion> movilizaciones;
 
 	public Auto() {
