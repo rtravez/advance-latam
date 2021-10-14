@@ -6,10 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@SpringBootApplication
+import ec.advance.latam.com.dao.impl.ExtendedRepositoryImpl;
 
+@SpringBootApplication
+@EnableJpaRepositories(repositoryBaseClass = ExtendedRepositoryImpl.class)
 public class BackendAmtApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BackendAmtApplication.class);
