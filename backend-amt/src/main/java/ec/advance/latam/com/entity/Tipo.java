@@ -26,6 +26,7 @@ public class Tipo implements Serializable {
 	@Column(name = "tipo_id", unique = true, nullable = false)
 	private Integer tipoId;
 
+	@Column(nullable = false)
 	private Boolean estado;
 
 	@Column(nullable = false, length = 255)
