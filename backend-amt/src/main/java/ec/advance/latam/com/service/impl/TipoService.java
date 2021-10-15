@@ -1,6 +1,7 @@
 package ec.advance.latam.com.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,17 @@ public class TipoService implements ITipoService {
 		} catch (Exception e) {
 			LOG.error("findAll: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar los registros");
+		}
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Optional<Tipo> findById(Long id) throws ExceptionManager {
+		try {
+			return tipoDao.findById(id);
+		} catch (Exception e) {
+			LOG.error("findById: ", e);
+			throw new ExceptionManager().new FindingException("Error al buscar el registro");
 		}
 	}
 }

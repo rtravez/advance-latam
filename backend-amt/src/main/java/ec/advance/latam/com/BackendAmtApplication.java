@@ -28,7 +28,7 @@ public class BackendAmtApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		for (int i = 0; i < 2; i++) {
 			String bCryptPasswordEncoder = passwordEncoder.encode("admin");
-			LOG.info("bCryptPasswordEncoder: " + bCryptPasswordEncoder);
+			LOG.info(bCryptPasswordEncoder);
 		}
 	}
 

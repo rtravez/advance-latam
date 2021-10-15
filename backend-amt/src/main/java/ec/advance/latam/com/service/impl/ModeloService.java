@@ -10,26 +10,26 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import ec.advance.latam.com.dao.IMarcaDao;
+import ec.advance.latam.com.dao.IModeloDao;
 import ec.advance.latam.com.entity.Marca;
-import ec.advance.latam.com.entity.Tipo;
+import ec.advance.latam.com.entity.Modelo;
 import ec.advance.latam.com.exception.ExceptionManager;
-import ec.advance.latam.com.service.IMarcaService;
+import ec.advance.latam.com.service.IModeloService;
 
 @Scope("singleton")
-@Service("MarcaService")
-public class MarcaService implements IMarcaService {
+@Service("ModeloService")
+public class ModeloService implements IModeloService {
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger LOG = LoggerFactory.getLogger(MarcaService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ModeloService.class);
 	@Autowired
-	private IMarcaDao marcaDao;
+	private IModeloDao modeloDao;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Marca> findMarcaByTipo(Tipo tipo) throws ExceptionManager {
+	public List<Modelo> findModeloByMarca(Marca marca) throws ExceptionManager {
 		try {
-			return marcaDao.findMarcaByTipo(tipo);
+			return modeloDao.findModeloByMarca(marca);
 		} catch (Exception e) {
 			LOG.error("findAll: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar los registros");
@@ -38,9 +38,9 @@ public class MarcaService implements IMarcaService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Optional<Marca> findById(Long id) throws ExceptionManager {
+	public Optional<Modelo> findById(Long id) throws ExceptionManager {
 		try {
-			return marcaDao.findById(id);
+			return modeloDao.findById(id);
 		} catch (Exception e) {
 			LOG.error("findById: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar el registro");
