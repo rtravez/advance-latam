@@ -43,9 +43,11 @@ public interface IMarcaMapper {
 	IMarcaMapper INSTANCE = Mappers.getMapper(IMarcaMapper.class);
 
 	@Mapping(target = "modeloDtos", source = "modelos")
+	@Mapping(target = "tipoDto", source = "tipo")
 	public MarcaDto marcaToMarcaDto(Marca marca);
 
 	@Mapping(target = "modelos", source = "modeloDtos")
+	@Mapping(target = "tipo", source = "tipoDto")
 	public Marca marcaDtoToMarca(MarcaDto marcaDto);
 
 	public List<MarcaDto> listMarcaToListMarcaDto(List<Marca> marcas);

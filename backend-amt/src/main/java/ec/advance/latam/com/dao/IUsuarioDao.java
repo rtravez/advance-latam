@@ -3,8 +3,6 @@ package ec.advance.latam.com.dao;
 import java.io.Serializable;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.Query;
-
 import ec.advance.latam.com.entity.Usuario;
 import ec.advance.latam.com.exception.ExceptionManager;
 
@@ -16,7 +14,7 @@ import ec.advance.latam.com.exception.ExceptionManager;
  */
 public interface IUsuarioDao extends IGenericDao<Usuario, Long>, Serializable {
 
-	@Query("select u from Usuario u where u.username = ?1")
+	//@Query("select u from Usuario u where u.username = ?1")
 	public Optional<Usuario> findByUsername(String username) throws ExceptionManager;
 
 }

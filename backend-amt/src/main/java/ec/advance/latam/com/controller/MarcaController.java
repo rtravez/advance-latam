@@ -1,5 +1,6 @@
 package ec.advance.latam.com.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -31,6 +32,10 @@ public class MarcaController {
 	@Autowired
 	private IMarcaMapper marcaMapper;
 	private Map<String, Object> response;
+
+	public MarcaController() {
+		response = new HashMap<>(); 
+	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/marcas/{tipo}")

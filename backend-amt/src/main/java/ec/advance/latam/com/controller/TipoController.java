@@ -1,5 +1,6 @@
 package ec.advance.latam.com.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -25,6 +26,9 @@ public class TipoController {
 	@Autowired
 	private ITipoMapper tipoMapper;
 	private Map<String, Object> response;
+	public TipoController() {
+		response = new HashMap<>();
+	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/tipos")
