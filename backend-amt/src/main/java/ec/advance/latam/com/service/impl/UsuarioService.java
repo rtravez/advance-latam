@@ -47,14 +47,17 @@ public class UsuarioService implements IUsuarioService {
 			throw new UsernameNotFoundException("Username: " + username + " no existe en el sistema!");
 		}
 
-		List<GrantedAuthority> authorities = usuario.getRolesUsuarios().stream().map(role -> new SimpleGrantedAuthority(role.getRole().getNombre()))
+		List<GrantedAuthority> authorities = usuario.getRolesUsuarios().stream()
+				.map(role -> new SimpleGrantedAuthority(role.getRole().getNombre()))
 				.peek(authority -> LOG.info("Role ".concat(authority.getAuthority()))).collect(Collectors.toList());
 
 		if (authorities.isEmpty()) {
 			LOG.error("Error en el Login: Usuario " + username + " no tiene roles asignados!");
-			throw new UsernameNotFoundException("Error en el Login: usuario " + username + " no tiene roles asignados!");
+			throw new UsernameNotFoundException(
+					"Error en el Login: usuario " + username + " no tiene roles asignados!");
 		}
-		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true, authorities);
+		return new User(usuario.getUsername(), usuario.getPassword(), usuario.getEnabled(), true, true, true,
+				authorities);
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class TipoController {
 	@Autowired
 	private ITipoMapper tipoMapper;
 	private Map<String, Object> response;
+
 	public TipoController() {
 		response = new HashMap<>();
 	}

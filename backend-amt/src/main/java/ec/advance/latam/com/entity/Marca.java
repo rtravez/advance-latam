@@ -45,17 +45,14 @@ public class Marca implements Serializable {
 
 	public Marca() {
 	}
-	
 
 	public Tipo getTipo() {
 		return tipo;
 	}
 
-
 	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
-
 
 	public Long getMarcaId() {
 		return marcaId;

@@ -32,8 +32,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 						"/swagger-ui.html", "/webjars/**")
 				.permitAll().antMatchers(HttpMethod.GET, "/api/empleados", "/api/vacunas").permitAll()
 				.antMatchers("/api/empleados/{cedula}", "/api/vacunas/{id}").permitAll()
-				.antMatchers("/api/empleados/**", "/api/vacunas/**").permitAll()
-				.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
+				.antMatchers("/api/empleados/**", "/api/vacunas/**").permitAll().anyRequest().authenticated().and()
+				.cors().configurationSource(corsConfigurationSource());
 	}
 
 	@Bean

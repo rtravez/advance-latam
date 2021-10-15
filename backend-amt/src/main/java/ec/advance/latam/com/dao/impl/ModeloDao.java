@@ -3,7 +3,7 @@ package ec.advance.latam.com.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,11 +23,11 @@ public class ModeloDao extends GenericDao<Modelo, Long> implements IModeloDao {
 		super(ei, em);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Modelo> findModeloByMarca(Marca marca) throws ExceptionManager {
 		try {
-			Query query = em.createQuery("select m from Modelo m where m.marca.marcaId =:marca");
+			TypedQuery<Modelo> query = em.createQuery("select m from Modelo m where m.marca.marcaId =:marca",
+					Modelo.class);
 			query.setParameter("marca", marca.getMarcaId());
 			return query.getResultList();
 		} catch (Exception e) {

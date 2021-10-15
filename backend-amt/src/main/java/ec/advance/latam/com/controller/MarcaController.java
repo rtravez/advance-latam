@@ -34,7 +34,7 @@ public class MarcaController {
 	private Map<String, Object> response;
 
 	public MarcaController() {
-		response = new HashMap<>(); 
+		response = new HashMap<>();
 	}
 
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
