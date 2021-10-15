@@ -7,12 +7,14 @@ import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 
 import ec.advance.latam.com.dao.IUsuarioDao;
 import ec.advance.latam.com.entity.Usuario;
 import ec.advance.latam.com.exception.ExceptionManager;
 
+@Scope("singleton")
 public class UsuarioDao extends GenericDao<Usuario, Long> implements IUsuarioDao {
 
 	private static final long serialVersionUID = 1L;
