@@ -14,3 +14,24 @@ INSERT INTO restricciones (restriccion_id, descripcion, estado, fecha_creacion, 
 INSERT INTO restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_VIE', 'VIERNES', true, '2021-10-14', true, '0,1,8,9', null, 5);
 INSERT INTO restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_SAB', 'SABADO', true, '2021-10-14', true, '', null, 6);
 INSERT INTO restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_DOM', 'DOMINGO', true, '2021-10-14', true, '', null, 7);
+
+INSERT INTO tipos (tipo_id, estado, nombre) VALUES (1, true, 'AUTOMOVILES');
+INSERT INTO tipos (tipo_id, estado, nombre) VALUES (2, true, 'ELECTRICOS');
+INSERT INTO tipos (tipo_id, estado, nombre) VALUES (3, true, 'SUVS');
+INSERT INTO tipos (tipo_id, estado, nombre) VALUES (4, true, 'CAMIONETAS');
+
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (1, true, 'NISSAN', 1);
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (2, true, 'KIA', 1);
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (3, true, 'CHEVROLET', 1);
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (4, true, 'NISSAN', 2);
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (5, true, 'NISSAN', 3);
+INSERT INTO marcas (marca_id, estado, nombre, tipo_id) VALUES (6, true, 'NISSAN', 4);
+
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (1, true, 'ALTIMA', 1);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (2, true, 'NUEVO VERSA', 1);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (3, true, 'LEAF', 1);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (4, true, 'LEAF', 4);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (5, true, 'KICKS', 5);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (6, true, 'QASHQAI', 5);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (7, true, 'X-TRIAL', 5);
+INSERT INTO modelos (modelo_id, estado, nombre, marca_id) VALUES (8, true, 'FRONTIER', 6);
