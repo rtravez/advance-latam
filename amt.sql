@@ -1,202 +1,632 @@
-CREATE TABLE 
-    AUTOS 
-    (
-        AUTO_ID SERIAL NOT NULL,
-        TIPO_ID INT4 NULL,
-        MARCA_ID INT4 NULL,
-        PLACA  VARCHAR(10) NOT NULL,
-        COLOR  VARCHAR(50) NOT NULL,
-        CHASIS VARCHAR(255) NOT NULL,
-        CONSTRAINT PK_AUTOS PRIMARY KEY (AUTO_ID)
-    );
-COMMENT ON TABLE AUTOS IS
-'AUTOS';
-COMMENT ON COLUMN AUTOS.AUTO_ID IS
-'AUTO_ID';
-COMMENT ON COLUMN AUTOS.TIPO_ID IS
-'TIPO_ID';
-COMMENT ON COLUMN AUTOS.MARCA_ID IS
-'MARCA_ID';
-COMMENT ON COLUMN AUTOS.PLACA IS
-'PLACA';
-COMMENT ON COLUMN AUTOS.COLOR IS
-'COLOR';
-COMMENT ON COLUMN AUTOS.CHASIS IS
-'CHASIS';
-CREATE TABLE 
-    MARCAS 
-    (
-        MARCA_ID SERIAL NOT NULL,
-        NOMBRE VARCHAR(255) NOT NULL,
-        ESTADO BOOL NOT NULL,
-        CONSTRAINT PK_MARCAS PRIMARY KEY (MARCA_ID)
-    );
-COMMENT ON TABLE MARCAS IS
-'MARCAS';
-COMMENT ON COLUMN MARCAS.MARCA_ID IS
-'MARCA_ID';
-COMMENT ON COLUMN MARCAS.NOMBRE IS
-'NOMBRE';
-COMMENT ON COLUMN MARCAS.ESTADO IS
-'ESTADO';
-CREATE TABLE 
-    MODELOS 
-    (
-        MODELO_ID SERIAL NOT NULL,
-        MARCA_ID INT4 NULL,
-        NOMBRE VARCHAR(255) NOT NULL,
-        ESTADO BOOL NOT NULL,
-        CONSTRAINT PK_MODELOS PRIMARY KEY (MODELO_ID)
-    );
-COMMENT ON TABLE MODELOS IS
-'MODELOS';
-COMMENT ON COLUMN MODELOS.MODELO_ID IS
-'MODELO_ID';
-COMMENT ON COLUMN MODELOS.MARCA_ID IS
-'MARCA_ID';
-COMMENT ON COLUMN MODELOS.NOMBRE IS
-'NOMBRE';
-COMMENT ON COLUMN MODELOS.ESTADO IS
-'ESTADO';
-CREATE TABLE 
-    MOVILIZACIONES 
-    (
-        MOVILIZACION_ID SERIAL NOT NULL,
-        AUTO_ID INT4 NULL,
-        FECHA DATE NOT NULL,
-        ESTADO BOOL NOT NULL,
-        CONSTRAINT PK_MOVILIZACIONES PRIMARY KEY (MOVILIZACION_ID)
-    );
-COMMENT ON TABLE MOVILIZACIONES IS
-'MOVILIZACIONES';
-COMMENT ON COLUMN MOVILIZACIONES.MOVILIZACION_ID IS
-'movilizacion_id';
-COMMENT ON COLUMN MOVILIZACIONES.AUTO_ID IS
-'AUTO_ID';
-COMMENT ON COLUMN MOVILIZACIONES.FECHA IS
-'fecha';
-COMMENT ON COLUMN MOVILIZACIONES.ESTADO IS
-'estado';
-CREATE TABLE 
-    ROLES 
-    (
-        ROL_ID SERIAL NOT NULL,
-        ESTADO BOOLEAN NOT NULL,
-        NOMBRE CHARACTER VARYING(20) NOT NULL,
-        CONSTRAINT ROLES_PK PRIMARY KEY (ROL_ID)
-    );
-COMMENT ON TABLE ROLES IS
-'ROLES';
-COMMENT ON COLUMN ROLES.ROL_ID IS
-'ROL_ID';
-COMMENT ON COLUMN ROLES.ESTADO IS
-'ESTADO';
-COMMENT ON COLUMN ROLES.NOMBRE IS
-'NOMBRE';
-CREATE TABLE 
-    ROLES_USUARIOS 
-    (
-        ROL_USUARIO_ID SERIAL NOT NULL,
-        ESTADO BOOLEAN NOT NULL,
-        ROL_ID INT4 NOT NULL,
-        USUARIO_ID INT4 NOT NULL,
-        CONSTRAINT ROLES_USUARIOS_PK PRIMARY KEY (ROL_USUARIO_ID)
-    );
-COMMENT ON TABLE ROLES_USUARIOS IS
-'ROLES_USUARIOS';
-COMMENT ON COLUMN ROLES_USUARIOS.ROL_USUARIO_ID IS
-'ROL_USUARIO_ID';
-COMMENT ON COLUMN ROLES_USUARIOS.ESTADO IS
-'ESTADO';
-COMMENT ON COLUMN ROLES_USUARIOS.ROL_ID IS
-'ROL_ID';
-COMMENT ON COLUMN ROLES_USUARIOS.USUARIO_ID IS
-'USUARIO_ID';
-CREATE TABLE 
-    TIPOS 
-    (
-        TIPO_ID SERIAL NOT NULL,
-        NOMBRE VARCHAR(255) NOT NULL,
-        ESTADO BOOL NULL,
-        CONSTRAINT PK_TIPOS PRIMARY KEY (TIPO_ID)
-    );
-COMMENT ON TABLE TIPOS IS
-'TIPOS';
-COMMENT ON COLUMN TIPOS.TIPO_ID IS
-'TIPO_ID';
-COMMENT ON COLUMN TIPOS.NOMBRE IS
-'NOMBRE';
-COMMENT ON COLUMN TIPOS.ESTADO IS
-'ESTADO';
-CREATE TABLE 
-    USUARIOS 
-    (
-        USUARIO_ID SERIAL NOT NULL,
-        ENABLED  BOOLEAN NOT NULL,
-        PASSWORD CHARACTER VARYING(60) NOT NULL,
-        USERNAME CHARACTER VARYING(20) NOT NULL,
-        CONSTRAINT USUARIOS_PK PRIMARY KEY (USUARIO_ID)
-    );
-COMMENT ON TABLE USUARIOS IS
-'USUARIOS';
-COMMENT ON COLUMN USUARIOS.USUARIO_ID IS
-'USUARIO_ID';
-COMMENT ON COLUMN USUARIOS.ENABLED IS
-'ENABLED';
-COMMENT ON COLUMN USUARIOS.PASSWORD IS
-'PASSWORD';
-COMMENT ON COLUMN USUARIOS.USERNAME IS
-'USERNAME';
-ALTER TABLE 
-    AUTOS ADD CONSTRAINT FK_AUTOS_REFERENCE_MARCAS FOREIGN KEY (MARCA_ID) REFERENCES MARCAS 
-    (MARCA_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
-ALTER TABLE 
-    AUTOS ADD CONSTRAINT FK_AUTOS_REFERENCE_TIPOS FOREIGN KEY (TIPO_ID) REFERENCES TIPOS (TIPO_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
-ALTER TABLE 
-    MODELOS ADD CONSTRAINT FK_MODELOS_REFERENCE_MARCAS FOREIGN KEY (MARCA_ID) REFERENCES MARCAS 
-    (MARCA_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
-ALTER TABLE 
-    MOVILIZACIONES ADD CONSTRAINT FK_MOVILIZA_REFERENCE_AUTOS FOREIGN KEY (AUTO_ID) REFERENCES 
-    AUTOS (AUTO_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
-ALTER TABLE 
-    ROLES_USUARIOS ADD CONSTRAINT FK_ROLES FOREIGN KEY (ROL_ID) REFERENCES ROLES (ROL_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
-ALTER TABLE 
-    ROLES_USUARIOS ADD CONSTRAINT FK_USUARIOS FOREIGN KEY (USUARIO_ID) REFERENCES USUARIOS 
-    (USUARIO_ID)
-ON 
-DELETE 
-    RESTRICT 
-ON 
-UPDATE 
-    RESTRICT;
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.8 (Ubuntu 12.8-1.pgdg20.04+1)
+-- Dumped by pg_dump version 14.0 (Ubuntu 14.0-1.pgdg20.04+1)
+
+-- Started on 2021-10-15 09:55:06 -05
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3052 (class 1262 OID 20481)
+-- Name: amt; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE amt WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+
+
+ALTER DATABASE amt OWNER TO postgres;
+
+\connect amt
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 203 (class 1259 OID 20484)
+-- Name: autos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.autos (
+    auto_id bigint NOT NULL,
+    chasis character varying(255) NOT NULL,
+    color character varying(50) NOT NULL,
+    placa character varying(10) NOT NULL,
+    modelo_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.autos OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 20482)
+-- Name: autos_auto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.autos ALTER COLUMN auto_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.autos_auto_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 205 (class 1259 OID 20491)
+-- Name: marcas; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.marcas (
+    marca_id bigint NOT NULL,
+    estado boolean NOT NULL,
+    nombre character varying(255) NOT NULL,
+    tipo_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.marcas OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 20489)
+-- Name: marcas_marca_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.marcas ALTER COLUMN marca_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.marcas_marca_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 207 (class 1259 OID 20498)
+-- Name: modelos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.modelos (
+    modelo_id bigint NOT NULL,
+    estado boolean NOT NULL,
+    nombre character varying(255) NOT NULL,
+    marca_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.modelos OWNER TO postgres;
+
+--
+-- TOC entry 206 (class 1259 OID 20496)
+-- Name: modelos_modelo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.modelos ALTER COLUMN modelo_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.modelos_modelo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 209 (class 1259 OID 20505)
+-- Name: movilizaciones; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.movilizaciones (
+    movilizacion_id bigint NOT NULL,
+    descripcion character varying(255) NOT NULL,
+    estado boolean NOT NULL,
+    fecha date NOT NULL,
+    auto_id bigint NOT NULL,
+    restriccion_id character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.movilizaciones OWNER TO postgres;
+
+--
+-- TOC entry 208 (class 1259 OID 20503)
+-- Name: movilizaciones_movilizacion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.movilizaciones ALTER COLUMN movilizacion_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.movilizaciones_movilizacion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 210 (class 1259 OID 20510)
+-- Name: restricciones; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.restricciones (
+    restriccion_id character varying(20) NOT NULL,
+    descripcion character varying(255) NOT NULL,
+    estado boolean NOT NULL,
+    fecha_creacion date NOT NULL,
+    modificable boolean NOT NULL,
+    valor_cadena character varying(255),
+    valor_decimal double precision,
+    valor_entero bigint
+);
+
+
+ALTER TABLE public.restricciones OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 20520)
+-- Name: roles; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.roles (
+    rol_id bigint NOT NULL,
+    estado boolean NOT NULL,
+    nombre character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.roles OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 20518)
+-- Name: roles_rol_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.roles ALTER COLUMN rol_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.roles_rol_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 214 (class 1259 OID 20527)
+-- Name: roles_usuarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.roles_usuarios (
+    rol_usuario_id bigint NOT NULL,
+    estado boolean NOT NULL,
+    rol_id bigint NOT NULL,
+    usuario_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.roles_usuarios OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 20525)
+-- Name: roles_usuarios_rol_usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.roles_usuarios ALTER COLUMN rol_usuario_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.roles_usuarios_rol_usuario_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 216 (class 1259 OID 20534)
+-- Name: tipos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.tipos (
+    tipo_id bigint NOT NULL,
+    estado boolean NOT NULL,
+    nombre character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.tipos OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 20532)
+-- Name: tipos_tipo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.tipos ALTER COLUMN tipo_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.tipos_tipo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 218 (class 1259 OID 20541)
+-- Name: usuarios; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios (
+    usuario_id bigint NOT NULL,
+    enabled boolean NOT NULL,
+    password character varying(60) NOT NULL,
+    username character varying(20) NOT NULL
+);
+
+
+ALTER TABLE public.usuarios OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 20539)
+-- Name: usuarios_usuario_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public.usuarios ALTER COLUMN usuario_id ADD GENERATED BY DEFAULT AS IDENTITY (
+    SEQUENCE NAME public.usuarios_usuario_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 3031 (class 0 OID 20484)
+-- Dependencies: 203
+-- Data for Name: autos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3033 (class 0 OID 20491)
+-- Dependencies: 205
+-- Data for Name: marcas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (1, true, 'NISSAN', 1);
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (2, true, 'KIA', 1);
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (3, true, 'CHEVROLET', 1);
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (4, true, 'NISSAN', 2);
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (5, true, 'NISSAN', 3);
+INSERT INTO public.marcas (marca_id, estado, nombre, tipo_id) VALUES (6, true, 'NISSAN', 4);
+
+
+--
+-- TOC entry 3035 (class 0 OID 20498)
+-- Dependencies: 207
+-- Data for Name: modelos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (1, true, 'ALTIMA', 1);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (2, true, 'NUEVO VERSA', 1);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (3, true, 'LEAF', 1);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (4, true, 'LEAF', 4);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (5, true, 'KICKS', 5);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (6, true, 'QASHQAI', 5);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (7, true, 'X-TRIAL', 5);
+INSERT INTO public.modelos (modelo_id, estado, nombre, marca_id) VALUES (8, true, 'FRONTIER', 6);
+
+
+--
+-- TOC entry 3037 (class 0 OID 20505)
+-- Dependencies: 209
+-- Data for Name: movilizaciones; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3038 (class 0 OID 20510)
+-- Dependencies: 210
+-- Data for Name: restricciones; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_LUN', 'LUNES', true, '2021-10-14', true, '0,1,2,3', NULL, 1);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_MAR', 'MARTES', true, '2021-10-14', true, '2,3,4,5', NULL, 2);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_MIE', 'MIERCOLES', true, '2021-10-14', true, '4,5,6,7', NULL, 3);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_JUE', 'JUEVES', true, '2021-10-14', true, '6,7,8,9', NULL, 4);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_VIE', 'VIERNES', true, '2021-10-14', true, '0,1,8,9', NULL, 5);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_SAB', 'SABADO', true, '2021-10-14', true, '', NULL, 6);
+INSERT INTO public.restricciones (restriccion_id, descripcion, estado, fecha_creacion, modificable, valor_cadena, valor_decimal, valor_entero) VALUES ('PRM_DOM', 'DOMINGO', true, '2021-10-14', true, '', NULL, 7);
+
+
+--
+-- TOC entry 3040 (class 0 OID 20520)
+-- Dependencies: 212
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.roles (rol_id, estado, nombre) VALUES (1, true, 'ROLE_USER');
+INSERT INTO public.roles (rol_id, estado, nombre) VALUES (2, true, 'ROLE_ADMIN');
+
+
+--
+-- TOC entry 3042 (class 0 OID 20527)
+-- Dependencies: 214
+-- Data for Name: roles_usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.roles_usuarios (rol_usuario_id, estado, rol_id, usuario_id) VALUES (1, true, 1, 1);
+INSERT INTO public.roles_usuarios (rol_usuario_id, estado, rol_id, usuario_id) VALUES (2, true, 2, 2);
+
+
+--
+-- TOC entry 3044 (class 0 OID 20534)
+-- Dependencies: 216
+-- Data for Name: tipos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.tipos (tipo_id, estado, nombre) VALUES (1, true, 'AUTOMOVILES');
+INSERT INTO public.tipos (tipo_id, estado, nombre) VALUES (2, true, 'ELECTRICOS');
+INSERT INTO public.tipos (tipo_id, estado, nombre) VALUES (3, true, 'SUVS');
+INSERT INTO public.tipos (tipo_id, estado, nombre) VALUES (4, true, 'CAMIONETAS');
+
+
+--
+-- TOC entry 3046 (class 0 OID 20541)
+-- Dependencies: 218
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.usuarios (usuario_id, enabled, password, username) VALUES (1, true, '$2a$10$d3rZ6nZbwvJ1P5q3zVZkju1IZEjrHWi/Uv7r949pIKC4LMHEIAUvy', 'rene');
+INSERT INTO public.usuarios (usuario_id, enabled, password, username) VALUES (2, true, '$2a$10$qTme6hMTZUgHKA0Wytbs7./PT3QHNj.kX8X9Jzn2riRiCouxEFEoq', 'admin');
+
+
+--
+-- TOC entry 3053 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: autos_auto_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.autos_auto_id_seq', 1, false);
+
+
+--
+-- TOC entry 3054 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: marcas_marca_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.marcas_marca_id_seq', 1, false);
+
+
+--
+-- TOC entry 3055 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: modelos_modelo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.modelos_modelo_id_seq', 1, false);
+
+
+--
+-- TOC entry 3056 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: movilizaciones_movilizacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.movilizaciones_movilizacion_id_seq', 1, false);
+
+
+--
+-- TOC entry 3057 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: roles_rol_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.roles_rol_id_seq', 2, true);
+
+
+--
+-- TOC entry 3058 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: roles_usuarios_rol_usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.roles_usuarios_rol_usuario_id_seq', 2, true);
+
+
+--
+-- TOC entry 3059 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: tipos_tipo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.tipos_tipo_id_seq', 1, false);
+
+
+--
+-- TOC entry 3060 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: usuarios_usuario_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.usuarios_usuario_id_seq', 2, true);
+
+
+--
+-- TOC entry 2880 (class 2606 OID 20488)
+-- Name: autos autos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.autos
+    ADD CONSTRAINT autos_pkey PRIMARY KEY (auto_id);
+
+
+--
+-- TOC entry 2882 (class 2606 OID 20495)
+-- Name: marcas marcas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.marcas
+    ADD CONSTRAINT marcas_pkey PRIMARY KEY (marca_id);
+
+
+--
+-- TOC entry 2884 (class 2606 OID 20502)
+-- Name: modelos modelos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.modelos
+    ADD CONSTRAINT modelos_pkey PRIMARY KEY (modelo_id);
+
+
+--
+-- TOC entry 2886 (class 2606 OID 20509)
+-- Name: movilizaciones movilizaciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.movilizaciones
+    ADD CONSTRAINT movilizaciones_pkey PRIMARY KEY (movilizacion_id);
+
+
+--
+-- TOC entry 2888 (class 2606 OID 20517)
+-- Name: restricciones restricciones_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.restricciones
+    ADD CONSTRAINT restricciones_pkey PRIMARY KEY (restriccion_id);
+
+
+--
+-- TOC entry 2890 (class 2606 OID 20524)
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (rol_id);
+
+
+--
+-- TOC entry 2892 (class 2606 OID 20531)
+-- Name: roles_usuarios roles_usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.roles_usuarios
+    ADD CONSTRAINT roles_usuarios_pkey PRIMARY KEY (rol_usuario_id);
+
+
+--
+-- TOC entry 2894 (class 2606 OID 20538)
+-- Name: tipos tipos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.tipos
+    ADD CONSTRAINT tipos_pkey PRIMARY KEY (tipo_id);
+
+
+--
+-- TOC entry 2896 (class 2606 OID 20545)
+-- Name: usuarios usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.usuarios
+    ADD CONSTRAINT usuarios_pkey PRIMARY KEY (usuario_id);
+
+
+--
+-- TOC entry 2898 (class 2606 OID 20551)
+-- Name: marcas fk7cfr0k1dhbf9m3ml6kvoai797; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.marcas
+    ADD CONSTRAINT fk7cfr0k1dhbf9m3ml6kvoai797 FOREIGN KEY (tipo_id) REFERENCES public.tipos(tipo_id);
+
+
+--
+-- TOC entry 2902 (class 2606 OID 20571)
+-- Name: roles_usuarios fk8h8m9o9mj4si1cj6d58xxc79l; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.roles_usuarios
+    ADD CONSTRAINT fk8h8m9o9mj4si1cj6d58xxc79l FOREIGN KEY (rol_id) REFERENCES public.roles(rol_id);
+
+
+--
+-- TOC entry 2899 (class 2606 OID 20556)
+-- Name: modelos fkfwmnvprqtv5jc4t60c076mj7h; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.modelos
+    ADD CONSTRAINT fkfwmnvprqtv5jc4t60c076mj7h FOREIGN KEY (marca_id) REFERENCES public.marcas(marca_id);
+
+
+--
+-- TOC entry 2903 (class 2606 OID 20576)
+-- Name: roles_usuarios fkghiaab413trbw9sho9o48klhp; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.roles_usuarios
+    ADD CONSTRAINT fkghiaab413trbw9sho9o48klhp FOREIGN KEY (usuario_id) REFERENCES public.usuarios(usuario_id);
+
+
+--
+-- TOC entry 2901 (class 2606 OID 20566)
+-- Name: movilizaciones fkh8o8b1ceego0jj92mv6bboism; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.movilizaciones
+    ADD CONSTRAINT fkh8o8b1ceego0jj92mv6bboism FOREIGN KEY (restriccion_id) REFERENCES public.restricciones(restriccion_id);
+
+
+--
+-- TOC entry 2900 (class 2606 OID 20561)
+-- Name: movilizaciones fklwtetqe3p8jfpj8cgkas78hql; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.movilizaciones
+    ADD CONSTRAINT fklwtetqe3p8jfpj8cgkas78hql FOREIGN KEY (auto_id) REFERENCES public.autos(auto_id);
+
+
+--
+-- TOC entry 2897 (class 2606 OID 20546)
+-- Name: autos fks40swyk85xnvxas4gx4jrm9j2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE  public.autos
+    ADD CONSTRAINT fks40swyk85xnvxas4gx4jrm9j2 FOREIGN KEY (modelo_id) REFERENCES public.modelos(modelo_id);
+
+
+-- Completed on 2021-10-15 09:55:06 -05
+
+--
+-- PostgreSQL database dump complete
+--
 
