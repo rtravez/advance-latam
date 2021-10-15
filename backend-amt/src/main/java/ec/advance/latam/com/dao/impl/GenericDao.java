@@ -20,11 +20,6 @@ public class GenericDao<T, ID extends Serializable> extends SimpleJpaRepository<
 
 	protected EntityManager em;
 
-	/*
-	 * public GenericDao(Class<T> domainClass, EntityManager em) {
-	 * super(domainClass, em); this.em = em; }
-	 */
-
 	public GenericDao(JpaEntityInformation<T, ID> ei, EntityManager em) {
 		super(ei, em);
 		this.em = em;
@@ -38,5 +33,4 @@ public class GenericDao<T, ID extends Serializable> extends SimpleJpaRepository<
 		TypedQuery<T> query = em.createQuery(cQuery);
 		return query.getResultList();
 	}
-
 }
