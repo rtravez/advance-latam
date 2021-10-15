@@ -12,7 +12,7 @@ public class TipoDto implements Serializable {
 
 	private String nombre;
 
-	private List<AutoDto> autoDtos;
+	private List<MarcaDto> marcaDtos;
 
 	public TipoDto() {
 	}
@@ -41,11 +41,11 @@ public class TipoDto implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<AutoDto> getAutoDtos() {
-		return autoDtos;
+	public List<MarcaDto> getMarcaDtos() {
+		return marcaDtos;
 	}
 
-	public void setAutoDtos(List<AutoDto> autoDtos) {
-		this.autoDtos = autoDtos;
+	public void setMarcaDtos(List<MarcaDto> marcaDtos) {
+		this.marcaDtos = marcaDtos;
 	}
 }

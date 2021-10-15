@@ -42,11 +42,6 @@ public class Auto implements Serializable {
 	@JoinColumn(name = "modelo_id", nullable = false)
 	private Modelo modelo;
 
-	// bi-directional many-to-one association to Tipo
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tipo_id", nullable = false)
-	private Tipo tipo;
-
 	// bi-directional many-to-one association to Movilizacion
 	@OneToMany(mappedBy = "auto", fetch = FetchType.LAZY)
 	private List<Movilizacion> movilizaciones;
@@ -92,14 +87,6 @@ public class Auto implements Serializable {
 
 	public void setModelo(Modelo modelo) {
 		this.modelo = modelo;
-	}
-
-	public Tipo getTipo() {
-		return this.tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
 	}
 
 	public List<Movilizacion> getMovilizaciones() {

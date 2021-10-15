@@ -20,7 +20,7 @@ public class AutoDao extends GenericDao<Auto, Long> implements IAutoDao {
 
 	@Override
 	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager {
-		return Optional.empty();
+		return null;
 	}
 
 }

@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,12 +34,28 @@ public class Marca implements Serializable {
 	@Column(nullable = false, length = 255)
 	private String nombre;
 
+	// bi-directional many-to-one association to Marca
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tipo_id", nullable = false)
+	private Tipo tipo;
+
 	// bi-directional many-to-one association to Modelo
 	@OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
 	private List<Modelo> modelos;
 
 	public Marca() {
 	}
+	
+
+	public Tipo getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+
 
 	public Long getMarcaId() {
 		return marcaId;

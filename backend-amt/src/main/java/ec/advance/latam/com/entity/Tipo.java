@@ -32,9 +32,9 @@ public class Tipo implements Serializable {
 	@Column(nullable = false, length = 255)
 	private String nombre;
 
-	// bi-directional many-to-one association to Auto
+	// bi-directional many-to-one association to Marca
 	@OneToMany(mappedBy = "tipo", fetch = FetchType.LAZY)
-	private List<Auto> autos;
+	private List<Marca> marcas;
 
 	public Tipo() {
 	}
@@ -63,26 +63,26 @@ public class Tipo implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Auto> getAutos() {
-		return this.autos;
+	public List<Marca> getMarcas() {
+		return marcas;
 	}
 
-	public void setAutos(List<Auto> autos) {
-		this.autos = autos;
+	public void setMarcas(List<Marca> marcas) {
+		this.marcas = marcas;
 	}
 
-	public Auto addAuto(Auto auto) {
-		getAutos().add(auto);
-		auto.setTipo(this);
+	public Marca addMarca(Marca marca) {
+		getMarcas().add(marca);
+		marca.setTipo(this);
 
-		return auto;
+		return marca;
 	}
 
-	public Auto removeAuto(Auto auto) {
-		getAutos().remove(auto);
-		auto.setTipo(null);
+	public Marca removeMarca(Marca marca) {
+		getMarcas().remove(marca);
+		marca.setTipo(null);
 
-		return auto;
+		return marca;
 	}
 
 }

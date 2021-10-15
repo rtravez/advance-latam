@@ -16,8 +16,6 @@ public class AutoDto implements Serializable {
 
 	private ModeloDto modeloDto;
 
-	private TipoDto tipoDto;
-
 	private List<MovilizacionDto> movilizacionDtos;
 
 	public AutoDto() {
@@ -61,14 +59,6 @@ public class AutoDto implements Serializable {
 
 	public void setModeloDto(ModeloDto modeloDto) {
 		this.modeloDto = modeloDto;
-	}
-
-	public TipoDto getTipoDto() {
-		return tipoDto;
-	}
-
-	public void setTipoDto(TipoDto tipoDto) {
-		this.tipoDto = tipoDto;
 	}
 
 	public List<MovilizacionDto> getMovilizacionDtos() {

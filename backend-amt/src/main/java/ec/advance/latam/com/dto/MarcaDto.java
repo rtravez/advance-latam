@@ -12,9 +12,19 @@ public class MarcaDto implements Serializable {
 
 	private String nombre;
 
+	private TipoDto tipoDto;
+
 	private List<ModeloDto> modeloDtos;
 
 	public MarcaDto() {
+	}
+
+	public TipoDto getTipoDto() {
+		return tipoDto;
+	}
+
+	public void setTipoDto(TipoDto tipoDto) {
+		this.tipoDto = tipoDto;
 	}
 
 	public Long getMarcaId() {
