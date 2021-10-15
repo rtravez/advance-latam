@@ -11,27 +11,31 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.repository.NoRepositoryBean;
 
-import ec.advance.latam.com.dao.ExtendedRepository;
+import ec.advance.latam.com.dao.IGenericDao;
 
-public class ExtendedRepositoryImpl<T, ID extends Serializable> extends SimpleJpaRepository<T, ID>
-		implements ExtendedRepository<T, ID> {
+@NoRepositoryBean
+public class GenericDao<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements IGenericDao<T, ID> {
 
-	private EntityManager entityManager;
+	protected EntityManager em;
 
-	public ExtendedRepositoryImpl(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
-		super(entityInformation, entityManager);
-		this.entityManager = entityManager;
+	/*
+	 * public GenericDao(Class<T> domainClass, EntityManager em) {
+	 * super(domainClass, em); this.em = em; }
+	 */
+
+	public GenericDao(JpaEntityInformation<T, ID> ei, EntityManager em) {
+		super(ei, em);
+		this.em = em;
 	}
 
-	@Transactional
 	public List<T> findByAttributeContainsText(String attributeName, String text) {
-		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQuery = builder.createQuery(getDomainClass());
 		Root<T> root = cQuery.from(getDomainClass());
 		cQuery.select(root).where(builder.like(root.<String>get(attributeName), "%" + text + "%"));
-		TypedQuery<T> query = entityManager.createQuery(cQuery);
+		TypedQuery<T> query = em.createQuery(cQuery);
 		return query.getResultList();
 	}
 

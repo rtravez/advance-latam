@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import ec.advance.latam.com.dao.IMarcaDao;
 import ec.advance.latam.com.entity.Marca;
@@ -23,6 +24,7 @@ public class MarcaService implements IMarcaService {
 	private IMarcaDao marcaDao;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Marca> findAll() throws ExceptionManager {
 		try {
 			return marcaDao.findAll();
@@ -31,5 +33,4 @@ public class MarcaService implements IMarcaService {
 			throw new ExceptionManager().new FindingException("Error al buscar los registros");
 		}
 	}
-
 }

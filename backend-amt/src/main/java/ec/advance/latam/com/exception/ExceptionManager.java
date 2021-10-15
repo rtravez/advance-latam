@@ -28,6 +28,7 @@ package ec.advance.latam.com.exception;
  * @author renetravez
  * @version $1.0$
  */
+
 public class ExceptionManager extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

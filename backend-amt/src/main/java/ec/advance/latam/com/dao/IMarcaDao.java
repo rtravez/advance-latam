@@ -1,9 +1,9 @@
 package ec.advance.latam.com.dao;
 
+import java.io.Serializable;
+
 import ec.advance.latam.com.entity.Marca;
 
-public interface IMarcaDao extends ExtendedRepository<Marca, Long> {
-	
-	void deleteByIdiiiiiiiiiii(Long id) ;
+public interface IMarcaDao extends IGenericDao<Marca, Long>, Serializable {
 
 }

@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import ec.advance.latam.com.dao.impl.ExtendedRepositoryImpl;
+import ec.advance.latam.com.dao.impl.GenericDao;
 
 @SpringBootApplication
-@EnableJpaRepositories(repositoryBaseClass = ExtendedRepositoryImpl.class)
+@EnableJpaRepositories(repositoryBaseClass = GenericDao.class)
 public class BackendAmtApplication implements CommandLineRunner {
 
 	private static final Logger LOG = LoggerFactory.getLogger(BackendAmtApplication.class);
