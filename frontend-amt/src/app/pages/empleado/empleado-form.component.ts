@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Empleado } from 'src/app/models/tipo';
-import { EmpleadoService } from 'src/app/services/empleado.service';
+import { EmpleadoService } from 'src/app/services/auto.service';
 
 @Component({
   selector: 'app-empleado-form',
