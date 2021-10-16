@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import ec.advance.latam.com.dto.MarcaDto;
@@ -37,7 +38,7 @@ import ec.advance.latam.com.entity.Marca;
  * @author renetravez
  * @version $1.0$
  */
-@Mapper(implementationName = "MarcaMapper", implementationPackage = "<PACKAGE_NAME>.impl")
+@Mapper(implementationName = "MarcaMapper", implementationPackage = "<PACKAGE_NAME>.impl", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface IMarcaMapper {
 
 	IMarcaMapper INSTANCE = Mappers.getMapper(IMarcaMapper.class);

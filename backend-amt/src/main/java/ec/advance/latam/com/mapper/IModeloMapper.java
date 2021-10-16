@@ -29,8 +29,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-import ec.advance.latam.com.dto.TipoDto;
-import ec.advance.latam.com.entity.Tipo;
+import ec.advance.latam.com.dto.ModeloDto;
+import ec.advance.latam.com.entity.Modelo;
 
 /**
  * <b> Descripcion de la clase, interface o enumeracion. </b>
@@ -38,19 +38,21 @@ import ec.advance.latam.com.entity.Tipo;
  * @author renetravez
  * @version $1.0$
  */
-@Mapper(implementationName = "TipoMapper", implementationPackage = "<PACKAGE_NAME>.impl", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface ITipoMapper {
+@Mapper(implementationName = "ModeloMapper", implementationPackage = "<PACKAGE_NAME>.impl", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IModeloMapper {
 
-	ITipoMapper INSTANCE = Mappers.getMapper(ITipoMapper.class);
+	IModeloMapper INSTANCE = Mappers.getMapper(IModeloMapper.class);
 
-	@Mapping(target = "marcaDtos", source = "marcas")
-	public TipoDto tipoToTipoDto(Tipo tipo);
+	@Mapping(target = "marcaDto.tipoDto", source = "marca.tipo")
+	@Mapping(target = "marcaDto", source = "marca")
+	public ModeloDto modeloToModeloDto(Modelo modelo);
 
-	@Mapping(target = "marcas", source = "marcaDtos")
-	public Tipo tipoDtoToTipo(TipoDto tipoDto);
+	@Mapping(target = "marca.tipo", source = "marcaDto.tipoDto")
+	@Mapping(target = "marca", source = "marcaDto")
+	public Modelo modeloDtoToModelo(ModeloDto modeloDto);
 
-	public List<TipoDto> listTipoToListTipoDto(List<Tipo> tipos);
+	public List<ModeloDto> listModeloToListModeloDto(List<Modelo> modelos);
 
-	public List<Tipo> listTipoDtoToListTipo(List<TipoDto> tipoDtos);
+	public List<Modelo> listModeloDtoToListModelo(List<ModeloDto> modeloDtos);
 
 }
