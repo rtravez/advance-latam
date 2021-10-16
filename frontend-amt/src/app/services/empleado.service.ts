@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { Empleado } from '../models/empleado';
+import { Empleado } from '../models/tipo';
 
 @Injectable({
   providedIn: 'root',

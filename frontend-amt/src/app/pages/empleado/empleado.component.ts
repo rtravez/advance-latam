@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Empleado } from 'src/app/models/empleado';
+import { Empleado } from 'src/app/models/tipo';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import Swal from 'sweetalert2';
