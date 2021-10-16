@@ -12,11 +12,21 @@ public class MovilizacionDto implements Serializable {
 
 	private Date fecha;
 
+	private String descripcion;
+
 	private AutoDto autoDto;
 
 	private RestriccionDto restriccionDto;
 
 	public MovilizacionDto() {
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public RestriccionDto getRestriccionDto() {
