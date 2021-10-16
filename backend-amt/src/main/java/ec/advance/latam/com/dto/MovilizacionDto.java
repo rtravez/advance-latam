@@ -3,6 +3,9 @@ package ec.advance.latam.com.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
 public class MovilizacionDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -10,12 +13,15 @@ public class MovilizacionDto implements Serializable {
 
 	private Boolean estado;
 
+	@Future
 	private Date fecha;
 
 	private String descripcion;
 
+	@NotNull
 	private AutoDto autoDto;
 
+	@NotNull
 	private RestriccionDto restriccionDto;
 
 	public MovilizacionDto() {

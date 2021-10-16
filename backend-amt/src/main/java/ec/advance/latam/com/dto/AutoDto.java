@@ -3,6 +3,7 @@ package ec.advance.latam.com.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,12 +13,14 @@ public class AutoDto implements Serializable {
 	private Long autoId;
 
 	@NotEmpty
+	@NotBlank
 	private String chasis;
 
 	@NotEmpty
 	private String color;
 
 	@NotEmpty
+	@NotBlank
 	private String placa;
 
 	private String observacion;

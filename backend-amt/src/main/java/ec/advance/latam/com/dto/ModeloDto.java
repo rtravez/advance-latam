@@ -2,6 +2,8 @@ package ec.advance.latam.com.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+
 public class ModeloDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -10,7 +12,8 @@ public class ModeloDto implements Serializable {
 	private Boolean estado;
 
 	private String nombre;
-
+	
+	@NotNull
 	private MarcaDto marcaDto;
 
 	public ModeloDto() {
