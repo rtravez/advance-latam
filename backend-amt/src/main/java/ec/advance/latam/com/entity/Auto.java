@@ -28,13 +28,16 @@ public class Auto implements Serializable {
 	@Column(name = "auto_id", unique = true, nullable = false)
 	private Long autoId;
 
-	@Column(nullable = false, length = 255)
+	@Column(unique = true, nullable = false, length = 255)
 	private String chasis;
+
+	@Column(nullable = true, length = 300)
+	private String observacion;
 
 	@Column(nullable = false, length = 50)
 	private String color;
 
-	@Column(nullable = false, length = 10)
+	@Column(unique = true, nullable = false, length = 10)
 	private String placa;
 
 	// bi-directional many-to-one association to Modelo
@@ -47,6 +50,14 @@ public class Auto implements Serializable {
 	private List<Movilizacion> movilizaciones;
 
 	public Auto() {
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 	public Long getAutoId() {

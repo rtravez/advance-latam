@@ -20,12 +20,22 @@ public class AutoDto implements Serializable {
 	@NotEmpty
 	private String placa;
 
+	private String observacion;
+
 	@NotNull
 	private ModeloDto modeloDto;
 
 	private List<MovilizacionDto> movilizacionDtos;
 
 	public AutoDto() {
+	}
+
+	public String getObservacion() {
+		return observacion;
+	}
+
+	public void setObservacion(String observacion) {
+		this.observacion = observacion;
 	}
 
 	public Long getAutoId() {
