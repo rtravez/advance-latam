@@ -76,9 +76,9 @@ public class AutoService implements IAutoService {
 
 	@Override
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
-	public void save(Auto auto) throws ExceptionManager {
+	public Auto save(Auto auto) throws ExceptionManager {
 		try {
-			autoDao.save(auto);
+			return autoDao.save(auto);
 		} catch (Exception e) {
 			LOG.error("save: ", e);
 			throw new ExceptionManager().new GettingException("Error al guardar el registro");

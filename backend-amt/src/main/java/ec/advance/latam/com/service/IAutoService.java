@@ -17,7 +17,7 @@ public interface IAutoService extends Serializable {
 
 	public void delete(Auto auto) throws ExceptionManager;
 
-	public void save(Auto auto) throws ExceptionManager;
+	public Auto save(Auto auto) throws ExceptionManager;
 
 	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager;
 
