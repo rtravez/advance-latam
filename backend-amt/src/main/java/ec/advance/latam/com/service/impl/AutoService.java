@@ -78,7 +78,15 @@ public class AutoService implements IAutoService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
 	public Auto save(Auto auto) throws ExceptionManager {
 		try {
+			if (autoDao.findAutoByPlaca(auto.getPlaca()).isPresent())
+				throw new ExceptionManager().new FindingException("La placa ya existe");
+
+			if (autoDao.findAutoByChasis(auto.getChasis()).isPresent())
+				throw new ExceptionManager().new FindingException("El chasis ya existe");
+
 			return autoDao.save(auto);
+		} catch (ExceptionManager e) {
+			throw e;
 		} catch (Exception e) {
 			LOG.error("save: ", e);
 			throw new ExceptionManager().new GettingException("Error al guardar el registro");
