@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guard/auth.guard';
 import { RoleGuard } from '../guard/role.guard';
+import { AutoFormComponent } from './auto/auto-form.component';
+import { AutoComponent } from './auto/auto.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { EmpleadoFormComponent } from './empleado/empleado-form.component';
-import { EmpleadoComponent } from './empleado/empleado.component';
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
+
 
 const routes: Routes = [
   {
@@ -25,21 +26,15 @@ const routes: Routes = [
         data: { title: 'Profile' },
       },
       {
-        path: 'empleado',
-        component: EmpleadoComponent,
-        data: { title: 'Empleado' },
+        path: 'auto',
+        component: AutoComponent,
+        data: { title: 'Auto' },
       },
       {
-        path: 'empleado/form',
-        component: EmpleadoFormComponent,
+        path: 'auto/form',
+        component: AutoFormComponent,
         canActivate: [AuthGuard, RoleGuard],
-        data: { role: 'ROLE_ADMIN', title: 'Crear Empleado' },
-      },
-      {
-        path: 'empleado/form/:cedula',
-        component: EmpleadoFormComponent,
-        canActivate: [AuthGuard, RoleGuard],
-        data: { role: 'ROLE_ADMIN', title: 'Editar Empleado' },
+        data: { role: 'ROLE_ADMIN', title: 'Crear Auto' },
       },
     ],
   },

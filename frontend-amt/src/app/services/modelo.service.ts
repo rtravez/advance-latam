@@ -15,8 +15,8 @@ export class ModeloService {
   });
   constructor(private http: HttpClient, private router: Router) {}
 
-  getMarcas(marca: string): Observable<Modelo> {
-    return this.http.get<Modelo>(`${this.url}/${marca}`).pipe(
+  getModelos(marca: number): Observable<Modelo[]> {
+    return this.http.get<Modelo[]>(`${this.url}/${marca}`).pipe(
       catchError((e) => {
         if (e.status != 401 && e.error.mensaje) {
           this.router.navigate(['/auto']);

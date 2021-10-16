@@ -2,6 +2,6 @@ export class Tipo {
   tipoId: number;
   nombre: string;
   estado: boolean;
-  marcaDtos: [];
+  marcaDtos: [] = [];
   constructor() {}
 }

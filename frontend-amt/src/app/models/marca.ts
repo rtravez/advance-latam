@@ -4,7 +4,7 @@ export class Marca {
   marcaId: number;
   nombre: string;
   estado: boolean;
-  tipo: Tipo;
-  modeloDtos: [];
+  tipoDto: Tipo;
+  modeloDtos: [] = [];
   constructor() {}
 }

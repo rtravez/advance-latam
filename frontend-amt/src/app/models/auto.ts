@@ -4,7 +4,9 @@ export class Auto {
   autoId: number;
   chasis: string;
   color: string;
+  placa: string;
+  observacion: string;
   estado: boolean;
-  modelo: Modelo;
+  modeloDto: Modelo;
   constructor() {}
 }
