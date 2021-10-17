@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AutoService {
   private url = `${environment.base_url}/autos`;
-  
+
   private httpHeaders: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
@@ -21,12 +21,11 @@ export class AutoService {
     return this.http.get<Auto[]>(this.url);
   }
 
-  getAuto(placa: string): Observable<Auto> {
+  getAutoByPlaca(placa: string): Observable<Auto> {
     return this.http.get<Auto>(`${this.url}/${placa}`).pipe(
       catchError((e) => {
-        if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/auto']);
-          console.error(e.error.mensaje);
+        if (e.status === 404) {
+          return throwError(e);
         }
         return throwError(e);
       })
