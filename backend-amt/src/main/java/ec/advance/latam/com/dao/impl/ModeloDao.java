@@ -26,8 +26,7 @@ public class ModeloDao extends GenericDao<Modelo, Long> implements IModeloDao {
 	@Override
 	public List<Modelo> findModeloByMarca(Marca marca) throws ExceptionManager {
 		try {
-			TypedQuery<Modelo> query = em.createQuery("select m from Modelo m where m.marca.marcaId =:marca",
-					Modelo.class);
+			TypedQuery<Modelo> query = em.createQuery("select m from Modelo m where m.marca.marcaId =:marca", Modelo.class);
 			query.setParameter("marca", marca.getMarcaId());
 			return query.getResultList();
 		} catch (Exception e) {

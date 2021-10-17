@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the usuarios database table.
- * 
  */
 @Entity
 @Table(name = "usuarios")

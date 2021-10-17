@@ -43,8 +43,7 @@ public class MarcaController {
 		try {
 			Optional<Tipo> t = tipoService.findById(tipo);
 			if (t.isPresent())
-				return ResponseEntity.ok()
-						.body(marcaMapper.listMarcaToListMarcaDto(marcaService.findMarcaByTipo(t.get())));
+				return ResponseEntity.ok().body(marcaMapper.listMarcaToListMarcaDto(marcaService.findMarcaByTipo(t.get())));
 			else {
 				response.put("mensaje", "La marca por tipo no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

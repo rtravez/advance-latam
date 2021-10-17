@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the marcas database table.
- * 
  */
 @Entity
 @Table(name = "marcas")

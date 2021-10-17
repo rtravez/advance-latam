@@ -43,8 +43,7 @@ public class ModeloController {
 		try {
 			Optional<Marca> m = marcaService.findById(marca);
 			if (m.isPresent())
-				return ResponseEntity.ok()
-						.body(modeloMapper.listModeloToListModeloDto(modeloService.findModeloByMarca(m.get())));
+				return ResponseEntity.ok().body(modeloMapper.listModeloToListModeloDto(modeloService.findModeloByMarca(m.get())));
 			else {
 				response.put("mensaje", "El modelo por marca no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);

@@ -27,8 +27,7 @@ public class UsuarioDao extends GenericDao<Usuario, Long> implements IUsuarioDao
 	@Override
 	public Optional<Usuario> findByUsername(String username) throws ExceptionManager {
 		try {
-			TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.username =:username",
-					Usuario.class);
+			TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.username =:username", Usuario.class);
 			query.setParameter("username", username);
 			return Optional.ofNullable(query.getSingleResult());
 		} catch (Exception e) {

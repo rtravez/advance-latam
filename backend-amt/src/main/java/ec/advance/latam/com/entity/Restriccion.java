@@ -11,7 +11,6 @@ import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the restricciones database table.
- * 
  */
 @Entity
 @Table(name = "restricciones")

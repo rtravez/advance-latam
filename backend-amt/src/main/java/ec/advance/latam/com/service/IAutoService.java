@@ -21,4 +21,6 @@ public interface IAutoService extends Serializable {
 
 	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager;
 
+	public boolean validarHoyNoCircula(String placa, String fecha) throws ExceptionManager;
+
 }

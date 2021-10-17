@@ -12,7 +12,7 @@ public class ModeloDto implements Serializable {
 	private Boolean estado;
 
 	private String nombre;
-	
+
 	@NotNull
 	private MarcaDto marcaDto;
 

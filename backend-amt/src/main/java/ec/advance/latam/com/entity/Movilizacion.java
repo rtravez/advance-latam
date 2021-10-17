@@ -17,7 +17,6 @@ import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the movilizaciones database table.
- * 
  */
 @Entity
 @Table(name = "movilizaciones")

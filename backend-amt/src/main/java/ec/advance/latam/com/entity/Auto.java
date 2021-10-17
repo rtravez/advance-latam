@@ -16,7 +16,6 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the autos database table.
- * 
  */
 @Entity
 @Table(name = "autos")

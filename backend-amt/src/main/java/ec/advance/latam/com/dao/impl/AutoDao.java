@@ -25,9 +25,7 @@ public class AutoDao extends GenericDao<Auto, Long> implements IAutoDao {
 	@Override
 	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager {
 		try {
-			TypedQuery<Auto> query = em.createQuery(
-					"select a from Auto a join fetch a.modelo m join fetch m.marca ma join fetch ma.tipo t where a.placa =:placa",
-					Auto.class);
+			TypedQuery<Auto> query = em.createQuery("select a from Auto a join fetch a.modelo m join fetch m.marca ma join fetch ma.tipo t where a.placa =:placa", Auto.class);
 			query.setParameter("placa", placa);
 			return Optional.ofNullable(query.getSingleResult());
 		} catch (Exception e) {
@@ -39,9 +37,7 @@ public class AutoDao extends GenericDao<Auto, Long> implements IAutoDao {
 	@Override
 	public Optional<Auto> findAutoByChasis(String chasis) throws ExceptionManager {
 		try {
-			TypedQuery<Auto> query = em.createQuery(
-					"select a from Auto a join fetch a.modelo m join fetch m.marca ma join fetch ma.tipo t where a.chasis =:chasis",
-					Auto.class);
+			TypedQuery<Auto> query = em.createQuery("select a from Auto a join fetch a.modelo m join fetch m.marca ma join fetch ma.tipo t where a.chasis =:chasis", Auto.class);
 			query.setParameter("chasis", chasis);
 			return Optional.ofNullable(query.getSingleResult());
 		} catch (Exception e) {

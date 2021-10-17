@@ -29,7 +29,7 @@ public class GenericDao<T, ID extends Serializable> extends SimpleJpaRepository<
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<T> cQuery = builder.createQuery(getDomainClass());
 		Root<T> root = cQuery.from(getDomainClass());
-		cQuery.select(root).where(builder.like(root.<String>get(attributeName), "%" + text + "%"));
+		cQuery.select(root).where(builder.like(root.<String> get(attributeName), "%" + text + "%"));
 		TypedQuery<T> query = em.createQuery(cQuery);
 		return query.getResultList();
 	}

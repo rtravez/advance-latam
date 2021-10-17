@@ -19,16 +19,12 @@ public class SwaggerConfig {
 
 	@Bean
 	public Docket apiDocket() {
-		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("ec.advance.latam.com.controller")).paths(PathSelectors.any())
-				.build().apiInfo(getApiInfo());
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("ec.advance.latam.com.controller")).paths(PathSelectors.any()).build().apiInfo(getApiInfo());
 	}
 
 	private ApiInfo getApiInfo() {
-		return new ApiInfo("Order Service API", "Order Service API Description", "1.0",
-				"https://www.advlatam.com/terms",
-				new Contact("Advance", "https://www.advlatam.com/", "apis@advlatam.com"), "LICENSE", "LICENSE URL",
-				Collections.emptyList());
+		return new ApiInfo("Order Service API", "Order Service API Description", "1.0", "https://www.advlatam.com/terms", new Contact("Advance", "https://www.advlatam.com/", "apis@advlatam.com"),
+				"LICENSE", "LICENSE URL", Collections.emptyList());
 	}
 
 }

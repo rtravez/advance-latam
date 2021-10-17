@@ -5,6 +5,11 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,8 +39,7 @@ public final class Utilities {
 
 	/**
 	 * @param word
-	 * @return Expresion regular "(\\d){1,10}\\.(\\d){1,10}" (\\d)digito {1,10}de 1
-	 *         a 10 caracteres \\. punto
+	 * @return Expresion regular "(\\d){1,10}\\.(\\d){1,10}" (\\d)digito {1,10}de 1 a 10 caracteres \\. punto
 	 */
 	public static boolean isDecimal(String word) {
 		boolean ret = false;
@@ -50,8 +54,7 @@ public final class Utilities {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static boolean checkNumberAndCheckWithPrecisionAndScale(String fieldValue, Integer precision,
-			Integer scale) {
+	public static boolean checkNumberAndCheckWithPrecisionAndScale(String fieldValue, Integer precision, Integer scale) {
 		boolean ret = false;
 		if (fieldValue != null && precision != null && scale != null) {
 			if (fieldValue.contains("E") && scale != 0) {
@@ -146,8 +149,7 @@ public final class Utilities {
 	public static boolean isValidEmail(String sEmail) {
 		boolean isValid = false;
 
-		final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-				+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+		final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 		Pattern pat = Pattern.compile(EMAIL_PATTERN);
 
@@ -282,8 +284,7 @@ public final class Utilities {
 					}
 				}
 			} catch (IllegalAccessException ea) {
-				throw new Exception(
-						"One of the objects you are trying to compare has its fields private please use the method way");
+				throw new Exception("One of the objects you are trying to compare has its fields private please use the method way");
 			} catch (Exception e) {
 				throw e;
 			}
@@ -291,27 +292,23 @@ public final class Utilities {
 		return couldPerformTask;
 	}
 
-	public String constructQuery(Object[] variables, Object[] variablesBetween, Object[] variablesBetweenDates)
-			throws Exception {
+	public String constructQuery(Object[] variables, Object[] variablesBetween, Object[] variablesBetweenDates) throws Exception {
 		String where = new String();
 		String tempWhere = new String();
 
 		if (variables != null) {
 			for (int i = 0; i < variables.length; i++) {
-				if ((variables[i] != null) && (variables[i + 1] != null) && (variables[i + 2] != null)
-						&& (variables[i + 3] != null)) {
+				if ((variables[i] != null) && (variables[i + 1] != null) && (variables[i + 2] != null) && (variables[i + 3] != null)) {
 					String variable = (String) variables[i];
 					Boolean booVariable = (Boolean) variables[i + 1];
 					Object value = variables[i + 2];
 					String comparator = (String) variables[i + 3];
 
 					if (booVariable.booleanValue()) {
-						tempWhere = (tempWhere.length() == 0)
-								? ("(model." + variable + " " + comparator + " \'" + value + "\' )")
+						tempWhere = (tempWhere.length() == 0) ? ("(model." + variable + " " + comparator + " \'" + value + "\' )")
 								: (tempWhere + " AND (model." + variable + " " + comparator + " \'" + value + "\' )");
 					} else {
-						tempWhere = (tempWhere.length() == 0)
-								? ("(model." + variable + " " + comparator + " " + value + " )")
+						tempWhere = (tempWhere.length() == 0) ? ("(model." + variable + " " + comparator + " " + value + " )")
 								: (tempWhere + " AND (model." + variable + " " + comparator + " " + value + " )");
 					}
 				}
@@ -322,19 +319,14 @@ public final class Utilities {
 
 		if (variablesBetween != null) {
 			for (int j = 0; j < variablesBetween.length; j++) {
-				if ((variablesBetween[j] != null) && (variablesBetween[j + 1] != null)
-						&& (variablesBetween[j + 2] != null) && (variablesBetween[j + 3] != null)
-						&& (variablesBetween[j + 4] != null)) {
+				if ((variablesBetween[j] != null) && (variablesBetween[j + 1] != null) && (variablesBetween[j + 2] != null) && (variablesBetween[j + 3] != null) && (variablesBetween[j + 4] != null)) {
 					String variable = (String) variablesBetween[j];
 					Object value = variablesBetween[j + 1];
 					Object value2 = variablesBetween[j + 2];
 					String comparator1 = (String) variablesBetween[j + 3];
 					String comparator2 = (String) variablesBetween[j + 4];
-					tempWhere = (tempWhere.length() == 0)
-							? ("(" + value + " " + comparator1 + " " + variable + " and " + variable + " " + comparator2
-									+ " " + value2 + " )")
-							: (tempWhere + " AND (" + value + " " + comparator1 + " " + variable + " and " + variable
-									+ " " + comparator2 + " " + value2 + " )");
+					tempWhere = (tempWhere.length() == 0) ? ("(" + value + " " + comparator1 + " " + variable + " and " + variable + " " + comparator2 + " " + value2 + " )")
+							: (tempWhere + " AND (" + value + " " + comparator1 + " " + variable + " and " + variable + " " + comparator2 + " " + value2 + " )");
 				}
 
 				j = j + 4;
@@ -343,8 +335,7 @@ public final class Utilities {
 
 		if (variablesBetweenDates != null) {
 			for (int k = 0; k < variablesBetweenDates.length; k++) {
-				if ((variablesBetweenDates[k] != null) && (variablesBetweenDates[k + 1] != null)
-						&& (variablesBetweenDates[k + 2] != null)) {
+				if ((variablesBetweenDates[k] != null) && (variablesBetweenDates[k + 1] != null) && (variablesBetweenDates[k + 2] != null)) {
 					String variable = (String) variablesBetweenDates[k];
 					Object object1 = variablesBetweenDates[k + 1];
 					Object object2 = variablesBetweenDates[k + 2];
@@ -360,10 +351,8 @@ public final class Utilities {
 						throw e;
 					}
 
-					tempWhere = (tempWhere.length() == 0)
-							? ("(model." + variable + " between \'" + value + "\' and \'" + value2 + "\')")
-							: (tempWhere + " AND (model." + variable + " between \'" + value + "\' and \'" + value2
-									+ "\')");
+					tempWhere = (tempWhere.length() == 0) ? ("(model." + variable + " between \'" + value + "\' and \'" + value2 + "\')")
+							: (tempWhere + " AND (model." + variable + " between \'" + value + "\' and \'" + value2 + "\')");
 				}
 
 				k = k + 2;
@@ -489,8 +478,7 @@ public final class Utilities {
 	}
 
 	/**
-	 * Función para obtener el número que sea múltiplo de "multiploDe" y mayor que
-	 * "mayorQue"
+	 * Función para obtener el número que sea múltiplo de "multiploDe" y mayor que "mayorQue"
 	 *
 	 * @author renetravez
 	 * @version Mar 24, 2018
@@ -582,11 +570,9 @@ public final class Utilities {
 	/**
 	 * Valida el número de RUC o cédula de ciudadanademáa.
 	 *
-	 * @param rucCedula El número de RUC (13 digitos) o cédula (10 dademágitos),
-	 *                  esta no debe contener el gión
-	 * @return -1 si el RUC o cédula es incorrecto, 1 si es RUC para Sociedades
-	 *         Privadas y Extranjeros sin cédula, 2 si es RUC para Sociedades
-	 *         Públicas, 3 si es RUC para Personas Naturales, 4 si es cédula,
+	 * @param rucCedula El número de RUC (13 digitos) o cédula (10 dademágitos), esta no debe contener el gión
+	 * @return -1 si el RUC o cédula es incorrecto, 1 si es RUC para Sociedades Privadas y Extranjeros sin cédula, 2 si es RUC para Sociedades Públicas, 3 si es RUC para Personas Naturales, 4 si es
+	 *         cédula,
 	 */
 	@SuppressWarnings("unused")
 	public static TipoDocumentoIdentidad validaRucCedula(final String rucCedula) {
@@ -767,4 +753,21 @@ public final class Utilities {
 		return TipoDocumentoIdentidad.RUC_CEDULA_NO_VALIDA; // ruc o cédula incorrecta
 	}
 
+	public static int dayOfWeek(Date fecha) {
+		ZoneId zoneId = ZoneId.of("America/Guayaquil");
+		LocalDateTime localDateTime = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+		ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
+		return zonedDateTime.getDayOfWeek().getValue();
+
+	}
+
+	public static Date convertirDateStringToDate(String fecha, String formato) throws ParseException {
+		SimpleDateFormat formatter = new SimpleDateFormat(formato);
+		return formatter.parse(fecha);
+	}
+
+	public static String convertirDateToDateString(Date fecha, String formato) {
+		SimpleDateFormat formatter = new SimpleDateFormat(formato);
+		return formatter.format(fecha);
+	}
 }

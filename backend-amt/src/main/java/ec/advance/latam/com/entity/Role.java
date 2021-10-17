@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 /**
  * The persistent class for the roles database table.
- * 
  */
 @Entity
 @Table(name = "roles")

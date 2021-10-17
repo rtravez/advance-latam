@@ -27,13 +27,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-				.antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
-						"/swagger-ui.html", "/webjars/**")
-				.permitAll().antMatchers(HttpMethod.GET, "/api/tipos", "/api/marcas", "/api/modelos", "/api/autos")
-				.permitAll().antMatchers("/api/marcas/{tipo}", "/api/modelos/{marca}", "/api/autos/{placa}").permitAll()
-				.antMatchers("/api/tipos/**", "/api/marcas/**", "/api/modelos/**", "/api/autos/**").permitAll()
-				.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
+		http.authorizeRequests().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/tipos", "/api/marcas", "/api/modelos", "/api/autos").permitAll().antMatchers("/api/marcas/{tipo}", "/api/modelos/{marca}", "/api/autos/{placa}")
+				.permitAll().antMatchers("/api/tipos/**", "/api/marcas/**", "/api/modelos/**", "/api/autos/**").permitAll().anyRequest().authenticated().and().cors()
+				.configurationSource(corsConfigurationSource());
 	}
 
 	@Bean
@@ -50,8 +47,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter() {
-		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(
-				new CorsFilter(corsConfigurationSource()));
+		FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<CorsFilter>(new CorsFilter(corsConfigurationSource()));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
