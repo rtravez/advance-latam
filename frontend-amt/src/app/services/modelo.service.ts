@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Modelo } from '../models/modelo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModeloService {
-  private url = 'http://localhost:1987/api/modelos';
+  private url = `${environment.base_url}/modelos`;
   private httpHeaders: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });

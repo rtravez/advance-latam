@@ -8,7 +8,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PagesComponent } from './pages.component';
 import { ProfileComponent } from './profile/profile.component';
 
-
 const routes: Routes = [
   {
     path: 'dashboard',
@@ -28,7 +27,8 @@ const routes: Routes = [
       {
         path: 'auto',
         component: AutoComponent,
-        data: { title: 'Auto' },
+        canActivate: [AuthGuard, RoleGuard],
+        data: { role: 'ROLE_ADMIN', title: 'Consultar Auto' },
       },
       {
         path: 'auto/form',

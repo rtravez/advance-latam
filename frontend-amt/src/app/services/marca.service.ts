@@ -2,15 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-import { Tipo } from '../models/tipo';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { Marca } from '../models/marca';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MarcaService {
-  private url = 'http://localhost:1987/api/marcas';
+  private url = `${environment.base_url}/marcas`;
   private httpHeaders: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });

@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Usuario } from '../models/usuario';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private url = 'http://localhost:1987/oauth/token';
+  private url = `${environment.base_token_url}`;
   private usuario: Usuario;
   private token: string;
   private credenciales = btoa('frontend-amt' + ':' + 'frontend-amt');

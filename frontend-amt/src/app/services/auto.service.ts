@@ -4,12 +4,14 @@ import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Auto } from '../models/auto';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AutoService {
-  private url = 'http://localhost:1987/api/autos';
+  private url = `${environment.base_url}/autos`;
+  
   private httpHeaders: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json',
   });
@@ -44,7 +46,7 @@ export class AutoService {
     return this.http.post(this.url, auto).pipe(
       map((response: any) => response.cliente as Auto),
       catchError((e) => {
-        if (e.status === 400) {
+        if (e.status === 400 || e.status === 500) {
           return throwError(e);
         }
         console.log(e.error.mensaje);

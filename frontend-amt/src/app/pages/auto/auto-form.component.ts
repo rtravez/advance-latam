@@ -18,13 +18,14 @@ import Swal from 'sweetalert2';
 })
 export class AutoFormComponent implements OnInit {
   tipos: Tipo[] = [];
-  tipo: Tipo = new Tipo();
+  tipo: Tipo;
   marcas: Marca[] = [];
-  marca: Marca = new Marca();
+  marca: Marca;
   modelos: Modelo[] = [];
-  modelo: Modelo = new Modelo();
+  modelo: Modelo;
   auto: Auto = new Auto();
-  errores: string[];
+  errores: string[] = [];
+  error: string;
 
   constructor(
     private router: Router,
@@ -47,6 +48,7 @@ export class AutoFormComponent implements OnInit {
 
   public cargarMarcas(): void {
     if (this.tipo != null) {
+      this.marca = new Marca();
       this.marca.tipoDto = this.tipo;
       this.marcaService.getMarcas(this.tipo.tipoId).subscribe((marcas) => {
         this.marcas = marcas;
@@ -56,6 +58,7 @@ export class AutoFormComponent implements OnInit {
 
   public cargarModelos(): void {
     if (this.marca != null) {
+      this.modelo = new Modelo();
       this.modelo.marcaDto = this.marca;
       this.modeloService.getModelos(this.marca.marcaId).subscribe((modelos) => {
         this.modelos = modelos;
@@ -63,7 +66,7 @@ export class AutoFormComponent implements OnInit {
     }
   }
 
-  public create(): void {
+  public create(): void {    
     if (this.modelo != null) {
       this.auto.modeloDto = this.modelo;
       console.log(this.auto);
@@ -82,6 +85,9 @@ export class AutoFormComponent implements OnInit {
             this.errores = err.error.errors as string[];
             console.error(err.status);
             console.error(err.error.errors);
+          } else if (err.status === 500) {
+            this.error = err.error.error;
+            console.log(this.error);
           }
         }
       );
