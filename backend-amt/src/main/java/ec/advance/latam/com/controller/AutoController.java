@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
@@ -60,7 +61,7 @@ public class AutoController {
 				response.put("mensaje", "El auto por placa no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			LOG.error("listar: ", e);
 			response.put("mensaje", "Error al buscar el registro");
 			response.put("error", e.getMessage());
@@ -86,7 +87,7 @@ public class AutoController {
 			response.put("mensaje", "El auto ha sido creado con éxito");
 			response.put("empleado", autoMapper.autoToAutoDto(auto));
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
-		} catch (Exception e) {
+		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al guardar el registro");
 			response.put("error", e.getMessage());
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
