@@ -3,7 +3,7 @@ backend and frontend
 
 # Backend
 # Crear la base de datos en PostgreSQL
-`CREATE DATABASE amt`
+`CREATE DATABASE amt` .
 Verificar que la base de datos este corriendo por el puerto por defecto `5432` .
 
 # Spring Tools
