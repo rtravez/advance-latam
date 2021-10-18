@@ -1,5 +1,5 @@
-#### advance-latam
-backend and frontend
+# advance-latam
+
 
 # Backend
 # Crear la base de datos en PostgreSQL
