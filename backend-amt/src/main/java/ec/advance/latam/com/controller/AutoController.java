@@ -58,9 +58,9 @@ public class AutoController {
 			Optional<Auto> a = autoService.findAutoByPlaca(placa);
 			if (a.isPresent())
 				return ResponseEntity.ok().body(autoMapper.autoToAutoDto(a.get()));
-			else {
-				response.put("mensaje", "El auto por placa no existe");
-				response.put("error", "El auto por placa no existe");
+			else {				
+				response.put("mensaje", "El auto con placa " + placa + " no existe");
+				response.put("error", "El auto con placa " + placa + " no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
 		} catch (DataAccessException e) {
@@ -127,8 +127,8 @@ public class AutoController {
 				response.put("auto", autoMapper.autoToAutoDto(auto.get()));
 				return ResponseEntity.status(HttpStatus.OK).body(response);
 			} else {
-				response.put("mensaje", "El auto por placa no existe");
-				response.put("error", "El auto por placa no existe");
+				response.put("mensaje", "El auto con placa " + placa + " no existe");
+				response.put("error", "El auto con placa " + placa + " no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 			}
 		} catch (DataAccessException e) {

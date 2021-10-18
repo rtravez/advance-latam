@@ -14,8 +14,7 @@ public class Test {
 		LocalDateTime localDateTime = LocalDateTime.now();
 		ZonedDateTime zonedDateTime = localDateTime.atZone(zoneId);
 		System.out.println("Date : " + zonedDateTime.getDayOfWeek().getValue());
-		
-		
+
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
 		String dateInString = "17-10-2021";

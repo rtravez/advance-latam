@@ -120,7 +120,7 @@ public class AutoService implements IAutoService {
 			Date fa = Utilities.convertirDateStringToDate(Utilities.convertirDateToDateString(new Date(), Constantes.FORMATO_FECHA), Constantes.FORMATO_FECHA);
 
 			if (f.getTime() < fa.getTime())
-				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: " + fa);
+				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: " + Utilities.convertirDateToDateString(fa, Constantes.FORMATO_FECHA));
 
 			Optional<Restriccion> restriccion = restriccionDao.findRestriccionByValorEntero(Long.valueOf(Utilities.dayOfWeek(f)));
 
