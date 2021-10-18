@@ -119,6 +119,7 @@ public class AutoController {
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/autos/hoynocircula/{placa}/fecha/{fecha}")
 	public ResponseEntity<?> validarHoyNoCircula(@PathVariable String placa, @PathVariable String fecha) {
+		response = new HashMap<>();
 		try {
 			Optional<Auto> auto = autoService.findAutoByPlaca(placa);
 			if (auto.isPresent()) {
