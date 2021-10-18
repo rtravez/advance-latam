@@ -3,8 +3,11 @@ backend and frontend
 
 # Backend
 # Crear la base de datos en PostgreSQL
-`CREATE DATABASE amt` .
-Verificar que la base de datos este corriendo por el puerto por defecto `5432` .
+`CREATE DATABASE amt`
+#
+Verificar que la base de datos este corriendo por el puerto por defecto `5432`.
+El usuario por defecto de la base es postgres 
+La contraseña es: admin
 
 # Spring Tools
 El proyecto esta generado con Spring Tools 4.12.0 y Java 11
