@@ -2,33 +2,40 @@
 backend and frontend
 
 # Backend
-This project was generated with Spring Tools
-# Crear la base de datos en Postgres
-CREATE DATABASE inventario_vacunas
-
+# Crear la base de datos en PostgreSQL
+`CREATE DATABASE amt`
+# Spring Tools
+El proyecto esta generado con Spring Tools 4.12.0 y Java 11
+Realizar el  Cleand and Build al proyecto backed y automáticamente se crea el esquema de base de datos con datos de prueba.
 # Frontend
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
-
+El proyecto fue generado con  [Angular CLI](https://github.com/angular/angular-cli) version 11.2.6.
+Ejecutar `npm install` para descargar todas las dependencias del proyecto.
+#
+Los datos de pruebas son los siguientes:
+#
+Usuario admin
+Contraseña: admin
+#
+Usuario rene
+Contrasena: 12345
+#
 ## Development server
+Ejecutar en la consola de proyecto `ng serve -o` y navegar `http://localhost:4200/`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+# Ejercicio
+Realizar una aplicación web para registro de autos y validación de hoy no circula. Esta aplicación debe: Tener 2 opciones: 
+a. Ingreso de información de auto 
+b. Consulta si un vehículo registrado puede circular en la fecha ingresada 
+El ingreso de información del auto debe capturar: Placa, color, modelo, chasis, cualquier otra información referente al vehículo. 
+La información puede almacenarse en una base de datos de tu elección. 
+El formulario de consulta debe permitir ingresar la placa y la fecha actual. 
+Se debe validar que la fecha ingresada no sea anterior a la fecha actual. 
+Se pueden ingresar fechas futuras Debe mostrar el resultado en un popup con la información del auto y un texto que indique si es libre de circular en la fecha ingresada Si el auto no se encuentra registrado, debe mostrar un mensaje indicando este particular y debe preguntar si desea registrar el vehículo. 
+Si el usuario dice que si desea registrar, se debe presentar el formulario de registro de datos. 
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
