@@ -4,6 +4,8 @@ backend and frontend
 # Backend
 # Crear la base de datos en PostgreSQL
 `CREATE DATABASE amt`
+Verificar que la base de datos este corriendo por el puerto por defecto `5432` .
+
 # Spring Tools
 El proyecto esta generado con Spring Tools 4.12.0 y Java 11
 Realizar el  Cleand and Build al proyecto backed y automáticamente se crea el esquema de base de datos con datos de prueba.
