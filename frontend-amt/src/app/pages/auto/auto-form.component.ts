@@ -66,7 +66,8 @@ export class AutoFormComponent implements OnInit {
     }
   }
 
-  public create(): void {    
+  public create(): void {
+    this.limpiar();
     if (this.modelo != null) {
       this.auto.modeloDto = this.modelo;
       console.log(this.auto);
@@ -92,5 +93,10 @@ export class AutoFormComponent implements OnInit {
         }
       );
     }
+  }
+
+  private limpiar(): void {
+    this.error = null;
+    this.errores = [];
   }
 }

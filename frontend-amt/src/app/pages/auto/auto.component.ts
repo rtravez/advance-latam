@@ -3,6 +3,7 @@ import { Auto } from 'src/app/models/auto';
 import { AuthService } from 'src/app/services/auth.service';
 import { AutoService } from 'src/app/services/auto.service';
 import Swal from 'sweetalert2';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-auto',
@@ -13,6 +14,7 @@ export class AutoComponent implements OnInit {
   autos: Auto[] = [];
   auto: Auto = new Auto();
   error: string;
+  datePipe: DatePipe = new DatePipe('en-US');
 
   constructor(
     private autoService: AutoService,
@@ -22,8 +24,7 @@ export class AutoComponent implements OnInit {
   ngOnInit(): void {}
 
   public find(): void {
-    this.autos = [];
-    this.error = null;
+    this.limpiar();
     if (this.auto != null && this.auto.placa != null) {
       this.autoService.getAutoByPlaca(this.auto.placa).subscribe(
         (auto) => {
@@ -62,5 +63,43 @@ export class AutoComponent implements OnInit {
         });
       }
     });
+  }
+
+  public validar(): void {
+    this.limpiar();
+    if (this.auto != null && this.auto.placa != null) {
+      this.autoService
+        .getvalidarHoyNoCircula(
+          this.auto.placa,
+          this.datePipe.transform(this.auto.fecha, 'dd-MM-yyyy')
+        )
+        .subscribe(
+          (auto) => {
+            this.find();
+            Swal.fire(
+              'Info',
+              `El auto con placa  ${
+                this.auto.placa
+              } puede circular en la fecha ${this.datePipe.transform(
+                this.auto.fecha,
+                'dd-MM-yyyy'
+              )}`,
+              'info'
+            );
+          },
+          (err) => {
+            if (err.status === 404 || err.status === 500) {
+              this.error = err.error.error;
+              console.log(this.error);
+              Swal.fire('Error', `${this.error}`, 'error');
+            }
+          }
+        );
+    }
+  }
+
+  private limpiar(): void {
+    this.autos = [];
+    this.error = null;
   }
 }

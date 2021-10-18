@@ -8,5 +8,6 @@ export class Auto {
   observacion: string;
   estado: boolean;
   modeloDto: Modelo;
+  fecha: Date;
   constructor() {}
 }

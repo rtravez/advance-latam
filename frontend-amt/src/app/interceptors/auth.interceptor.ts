@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
             `Hola ${this.authService.getUsuario.username} no tienes acceso a este recurso!`,
             'warning'
           );
-          this.router.navigate(['/empleado']);
+          this.router.navigate(['/auto']);
         }
         return throwError(e);
       })

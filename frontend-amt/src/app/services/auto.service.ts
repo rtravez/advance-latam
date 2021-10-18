@@ -32,6 +32,19 @@ export class AutoService {
     );
   }
 
+  getvalidarHoyNoCircula(placa: string, fecha: string): Observable<Auto> {
+    return this.http
+      .get<Auto>(`${this.url}/hoynocircula/${placa}/fecha/${fecha}`)
+      .pipe(
+        catchError((e) => {
+          if (e.status === 404 || e.status === 500) {
+            return throwError(e);
+          }
+          return throwError(e);
+        })
+      );
+  }
+
   public delete(id: number): Observable<Auto> {
     return this.http.delete<Auto>(`${this.url}/${id}`).pipe(
       catchError((e) => {

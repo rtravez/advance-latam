@@ -27,8 +27,10 @@ const routes: Routes = [
       {
         path: 'auto',
         component: AutoComponent,
-        canActivate: [AuthGuard, RoleGuard],
-        data: { role: 'ROLE_ADMIN', title: 'Consultar Auto' },
+        //canActivate: [AuthGuard, RoleGuard],
+        data: {
+          /*role: ['ROLE_ADMIN', 'ROLE_USER'],*/ title: 'Consultar Auto',
+        },
       },
       {
         path: 'auto/form',
