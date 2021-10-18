@@ -9,6 +9,8 @@ Verificar que la base de datos este corriendo por el puerto por defecto `5432`.
 El usuario por defecto de la base es postgres 
 La contraseña es: admin
 
+Si prefiere cambiar las configuraciones en el archivo `application.properties `
+
 # Spring Tools
 El proyecto esta generado con Spring Tools 4.12.0 y Java 11
 Realizar el  Cleand and Build al proyecto backed y automáticamente se crea el esquema de base de datos con datos de prueba.
