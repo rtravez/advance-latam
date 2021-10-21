@@ -7,6 +7,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class AutoDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,6 +33,7 @@ public class AutoDto implements Serializable {
 	@NotNull
 	private ModeloDto modeloDto;
 
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<MovilizacionDto> movilizacionDtos;
 
 	public AutoDto() {

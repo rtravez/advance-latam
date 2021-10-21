@@ -6,8 +6,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class Test {
+public class MainTest {
 
 	public static void main(String[] args) throws ParseException {
 		ZoneId zoneId = ZoneId.of("America/Guayaquil");
@@ -21,5 +23,25 @@ public class Test {
 		Date date = formatter.parse(dateInString);
 		System.out.println(date);
 
+		System.out.print(isValidPlaca("PDF-1987"));
+
+	}
+
+	@SuppressWarnings("unused")
+	public static boolean isValidPlaca(String placa) {
+		boolean isValid = false;
+
+		final String PLACA_PATTERN = "(^[a-zA-Z]{3,3})*-([0-9]{3,4})";
+
+		Pattern pat = Pattern.compile(PLACA_PATTERN);
+
+		Matcher mat = pat.matcher(placa);
+
+		if (pat.matcher(placa).matches()) {
+			isValid = true;
+		} else {
+			isValid = false;
+		}
+		return isValid;
 	}
 }

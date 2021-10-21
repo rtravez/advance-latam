@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MarcaDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 

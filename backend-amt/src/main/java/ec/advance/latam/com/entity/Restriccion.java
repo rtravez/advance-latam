@@ -1,5 +1,6 @@
 package ec.advance.latam.com.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -14,7 +15,9 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "restricciones")
-public class Restriccion {
+public class Restriccion implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "restriccion_id", unique = true, nullable = false, length = 20)

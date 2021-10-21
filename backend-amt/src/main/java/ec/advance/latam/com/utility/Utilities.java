@@ -164,6 +164,33 @@ public final class Utilities {
 	}
 
 	/**
+	 * <b> Método que valida la placa del auto. </b>
+	 * <p>
+	 * [Author renetravez, Oct 18, 2021]
+	 * </p>
+	 *
+	 * @param placa La placa del auto
+	 * @return boolean verdadero si es una placa válida, false en caso que no sea así.
+	 */
+	@SuppressWarnings("unused")
+	public static boolean isValidPlaca(String placa) {
+		boolean isValid = false;
+
+		final String PLACA_PATTERN = "(^[a-zA-Z]{3,3})*-([0-9]{3,4})";
+
+		Pattern pat = Pattern.compile(PLACA_PATTERN);
+
+		Matcher mat = pat.matcher(placa);
+
+		if (pat.matcher(placa).matches()) {
+			isValid = true;
+		} else {
+			isValid = false;
+		}
+		return isValid;
+	}
+
+	/**
 	 * <b> Incluir aqui la descripcion del metodo. </b>
 	 * <p>
 	 * [Author renetravez, Oct 10, 2021]

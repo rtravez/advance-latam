@@ -85,7 +85,7 @@ public class AutoController {
 			Auto auto = autoMapper.autoDtoToAuto(autoDto);
 			auto = autoService.save(auto);
 			response.put("mensaje", "El auto ha sido creado con éxito");
-			response.put("empleado", autoMapper.autoToAutoDto(auto));
+			response.put("auto", autoMapper.autoToAutoDto(auto));
 			return ResponseEntity.status(HttpStatus.CREATED).body(response);
 		} catch (DataAccessException e) {
 			response.put("mensaje", "Error al guardar el registro");
