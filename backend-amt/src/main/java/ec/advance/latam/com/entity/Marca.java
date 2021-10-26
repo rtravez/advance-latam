@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "marcas")
-public class Marca implements Serializable {
+public class Marca extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -43,6 +43,7 @@ public class Marca implements Serializable {
 	private List<Modelo> modelos;
 
 	public Marca() {
+		super();
 	}
 
 	public Tipo getTipo() {

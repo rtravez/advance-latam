@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "movilizaciones")
-public class Movilizacion implements Serializable {
+public class Movilizacion extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,6 +49,7 @@ public class Movilizacion implements Serializable {
 	private Restriccion restriccion;
 
 	public Movilizacion() {
+		super();
 	}
 
 	public Long getMovilizacionId() {

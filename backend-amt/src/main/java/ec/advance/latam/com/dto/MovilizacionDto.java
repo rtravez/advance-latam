@@ -6,7 +6,7 @@ import java.util.Date;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
-public class MovilizacionDto implements Serializable {
+public class MovilizacionDto extends BaseDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long movilizacionId;

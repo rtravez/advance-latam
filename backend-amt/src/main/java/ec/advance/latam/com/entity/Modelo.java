@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "modelos")
-public class Modelo implements Serializable {
+public class Modelo extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,6 +37,7 @@ public class Modelo implements Serializable {
 	private Marca marca;
 
 	public Modelo() {
+		super();
 	}
 
 	public Long getModeloId() {

@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "autos")
-public class Auto implements Serializable {
+public class Auto extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -49,6 +49,7 @@ public class Auto implements Serializable {
 	private List<Movilizacion> movilizaciones;
 
 	public Auto() {
+		super();
 	}
 
 	public String getObservacion() {

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AutoDto implements Serializable {
+public class AutoDto extends BaseDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long autoId;

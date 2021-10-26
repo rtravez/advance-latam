@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ModeloDto implements Serializable {
+public class ModeloDto extends BaseDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long modeloId;
