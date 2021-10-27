@@ -31,7 +31,7 @@ public abstract class BaseEntity implements Serializable {
 	protected Date fechaModificacion;
 
 	@Column(name = "usuario_modificacion", insertable = true, updatable = false, nullable = true, length = 50)
-	private String usuarioModificacion;
+	protected String usuarioModificacion;
 
 	public String getHostCreacion() {
 		return hostCreacion;
