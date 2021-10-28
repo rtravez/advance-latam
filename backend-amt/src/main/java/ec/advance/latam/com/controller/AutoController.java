@@ -54,11 +54,12 @@ public class AutoController {
 	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
 	@GetMapping("/autos/{placa}")
 	public ResponseEntity<?> findAutoByPlaca(@PathVariable String placa) {
+		response = new HashMap<>();
 		try {
 			Optional<Auto> a = autoService.findAutoByPlaca(placa);
 			if (a.isPresent())
 				return ResponseEntity.ok().body(autoMapper.autoToAutoDto(a.get()));
-			else {				
+			else {
 				response.put("mensaje", "El auto con placa " + placa + " no existe");
 				response.put("error", "El auto con placa " + placa + " no existe");
 				return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
@@ -77,7 +78,9 @@ public class AutoController {
 		response = new HashMap<>();
 		try {
 			if (result.hasErrors()) {
-				List<String> errors = result.getFieldErrors().stream().map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage()).collect(Collectors.toList());
+				List<String> errors = result.getFieldErrors().stream()
+						.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
+						.collect(Collectors.toList());
 				response.put("errors", errors);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
