@@ -42,7 +42,7 @@ public class AutoService extends GenericService<Auto, Long> implements IAutoServ
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	//@Transactional(readOnly = true)
 	public List<Auto> findAll() throws ExceptionManager {
 		try {
 			return super.findAll();
