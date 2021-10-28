@@ -9,10 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.advance.latam.com.dao.IAutoDao;
+import ec.advance.latam.com.dao.IGenericDao;
 import ec.advance.latam.com.dao.IRestriccionDao;
 import ec.advance.latam.com.entity.Auto;
 import ec.advance.latam.com.entity.Restriccion;
@@ -23,10 +23,9 @@ import ec.advance.latam.com.utility.Utilities;
 
 @Scope("singleton")
 @Service("AutoService")
-public class AutoService implements IAutoService {
+public class AutoService extends GenericService<Auto, Long> implements IAutoService {
 
 	private static final long serialVersionUID = 1L;
-
 	private static final Logger LOG = LoggerFactory.getLogger(AutoService.class);
 
 	@Autowired
@@ -34,11 +33,19 @@ public class AutoService implements IAutoService {
 	@Autowired
 	private IRestriccionDao restriccionDao;
 
+	public AutoService() {
+	}
+
+	@Autowired
+	public AutoService(IGenericDao<Auto, Long> genericDao) {
+		super(genericDao);
+	}
+
 	@Override
 	@Transactional(readOnly = true)
 	public List<Auto> findAll() throws ExceptionManager {
 		try {
-			return autoDao.findAll();
+			return super.findAll();
 		} catch (Exception e) {
 			LOG.error("findAll: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar los registros");
@@ -46,10 +53,10 @@ public class AutoService implements IAutoService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	// @Transactional(readOnly = true)
 	public boolean existsById(Long id) throws ExceptionManager {
 		try {
-			return autoDao.existsById(id);
+			return super.existsById(id);
 		} catch (Exception e) {
 			LOG.error("existsById: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar el registro");
@@ -58,10 +65,10 @@ public class AutoService implements IAutoService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
+	// @Transactional(readOnly = true)
 	public Optional<Auto> findById(Long id) throws ExceptionManager {
 		try {
-			return autoDao.findById(id);
+			return super.findById(id);
 		} catch (Exception e) {
 			LOG.error("findById: ", e);
 			throw new ExceptionManager().new FindingException("Error al buscar el registro");
@@ -70,10 +77,11 @@ public class AutoService implements IAutoService {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
+	// @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	// rollbackFor = ExceptionManager.class)
 	public void delete(Auto auto) throws ExceptionManager {
 		try {
-			autoDao.delete(auto);
+			super.delete(auto);
 		} catch (Exception e) {
 			LOG.error("delete: ", e);
 			throw new ExceptionManager().new GettingException("Error al eliminar el registro");
@@ -82,7 +90,8 @@ public class AutoService implements IAutoService {
 	}
 
 	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
+	// @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	// rollbackFor = ExceptionManager.class)
 	public Auto save(Auto auto) throws ExceptionManager {
 		try {
 			if (autoDao.findAutoByPlaca(auto.getPlaca()).isPresent())
@@ -91,7 +100,7 @@ public class AutoService implements IAutoService {
 			if (autoDao.findAutoByChasis(auto.getChasis()).isPresent())
 				throw new ExceptionManager().new FindingException("El chasis ya existe");
 
-			return autoDao.save(auto);
+			return super.save(auto);
 		} catch (ExceptionManager e) {
 			throw e;
 		} catch (Exception e) {
@@ -117,12 +126,16 @@ public class AutoService implements IAutoService {
 		try {
 			String ultimoDigito;
 			Date f = Utilities.convertirDateStringToDate(fecha, Constantes.FORMATO_FECHA);
-			Date fa = Utilities.convertirDateStringToDate(Utilities.convertirDateToDateString(new Date(), Constantes.FORMATO_FECHA), Constantes.FORMATO_FECHA);
+			Date fa = Utilities.convertirDateStringToDate(
+					Utilities.convertirDateToDateString(new Date(), Constantes.FORMATO_FECHA),
+					Constantes.FORMATO_FECHA);
 
 			if (f.getTime() < fa.getTime())
-				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: " + Utilities.convertirDateToDateString(fa, Constantes.FORMATO_FECHA));
+				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: "
+						+ Utilities.convertirDateToDateString(fa, Constantes.FORMATO_FECHA));
 
-			Optional<Restriccion> restriccion = restriccionDao.findRestriccionByValorEntero(Long.valueOf(Utilities.dayOfWeek(f)));
+			Optional<Restriccion> restriccion = restriccionDao
+					.findRestriccionByValorEntero(Long.valueOf(Utilities.dayOfWeek(f)));
 
 			if (restriccion.isPresent()) {
 				String diasNocircula[] = restriccion.get().getValorCadena().split(",");
@@ -131,14 +144,16 @@ public class AutoService implements IAutoService {
 						ultimoDigito = placa.substring(6, 7);
 						for (int x = 0; x < diasNocircula.length; x++) {
 							if (diasNocircula[x].equals(ultimoDigito)) {
-								throw new ExceptionManager().new GettingException("El auto con placa " + placa + " no puede circular por su ultimo digito verificador " + ultimoDigito);
+								throw new ExceptionManager().new GettingException("El auto con placa " + placa
+										+ " no puede circular por su ultimo digito verificador " + ultimoDigito);
 							}
 						}
 					} else if (placa.trim().length() == Constantes.FORMATO_PLACA8) {
 						ultimoDigito = placa.substring(7, 8);
 						for (int x = 0; x < diasNocircula.length; x++) {
 							if (diasNocircula[x].equals(ultimoDigito)) {
-								throw new ExceptionManager().new GettingException("El auto con placa " + placa + " no puede circular por su ultimo digito verificador " + ultimoDigito);
+								throw new ExceptionManager().new GettingException("El auto con placa " + placa
+										+ " no puede circular por su ultimo digito verificador " + ultimoDigito);
 							}
 						}
 					} else {
