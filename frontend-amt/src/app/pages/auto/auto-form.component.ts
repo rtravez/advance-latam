@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { auto } from '@popperjs/core';
 import { Auto } from 'src/app/models/auto';
 import { Marca } from 'src/app/models/marca';
 import { Modelo } from 'src/app/models/modelo';
@@ -41,7 +40,7 @@ export class AutoFormComponent implements OnInit {
   }
 
   public cargarTipos(): void {
-    this.tipoService.getTipos().subscribe((tipos) => {
+    this.tipoService.findAll().subscribe((tipos) => {
       this.tipos = tipos;
     });
   }
@@ -50,7 +49,7 @@ export class AutoFormComponent implements OnInit {
     if (this.tipo != null) {
       this.marca = new Marca();
       this.marca.tipoDto = this.tipo;
-      this.marcaService.getMarcas(this.tipo.tipoId).subscribe((marcas) => {
+      this.marcaService.findMarcaByTipo(this.tipo.tipoId).subscribe((marcas) => {
         this.marcas = marcas;
       });
     }
@@ -60,7 +59,7 @@ export class AutoFormComponent implements OnInit {
     if (this.marca != null) {
       this.modelo = new Modelo();
       this.modelo.marcaDto = this.marca;
-      this.modeloService.getModelos(this.marca.marcaId).subscribe((modelos) => {
+      this.modeloService.findModeloByMarca(this.marca.marcaId).subscribe((modelos) => {
         this.modelos = modelos;
       });
     }
@@ -71,7 +70,7 @@ export class AutoFormComponent implements OnInit {
     if (this.modelo != null) {
       this.auto.modeloDto = this.modelo;
       console.log(this.auto);
-      this.autoService.create(this.auto).subscribe(
+      this.autoService.save(this.auto).subscribe(
         (auto) => {
           Swal.fire(
             'Nuevo:',

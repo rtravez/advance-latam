@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  base_url: 'http://localhost:1987/api',
-  base_token_url: 'http://localhost:1987/oauth/token',
+  api: {
+    baseUrl: 'http://localhost:1987/api',
+    baseTokenUrl: 'http://localhost:1987/oauth/token',
+  },
 };
 
 /*

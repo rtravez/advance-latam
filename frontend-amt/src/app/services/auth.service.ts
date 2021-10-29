@@ -7,7 +7,7 @@ import { Usuario } from '../models/usuario';
   providedIn: 'root',
 })
 export class AuthService {
-  private url = `${environment.base_token_url}`;
+  private url = `${environment.api.baseTokenUrl}`;
   private usuario: Usuario;
   private token: string;
   private credenciales = btoa('frontend-amt' + ':' + 'frontend-amt');

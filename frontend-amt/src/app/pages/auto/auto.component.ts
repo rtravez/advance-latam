@@ -26,7 +26,7 @@ export class AutoComponent implements OnInit {
   public find(): void {
     this.limpiar();
     if (this.auto != null && this.auto.placa != null) {
-      this.autoService.getAutoByPlaca(this.auto.placa).subscribe(
+      this.autoService.findAutoByPlaca(this.auto.placa).subscribe(
         (auto) => {
           this.autos.push(auto);
           //this.autos = this.autos.filter((aut) => aut === auto);
@@ -69,7 +69,7 @@ export class AutoComponent implements OnInit {
     this.limpiar();
     if (this.auto != null && this.auto.placa != null) {
       this.autoService
-        .getvalidarHoyNoCircula(
+        .findHoyNoCircula(
           this.auto.placa,
           this.datePipe.transform(this.auto.fecha, 'dd-MM-yyyy')
         )
