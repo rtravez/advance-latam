@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   public login(): void {
     if (this.usuario.username === null || this.usuario.password === null) {
       Swal.fire('Error Login', 'Username o password incorrectos', 'error');
-      return;
+      // return;
     } else {
       this.authService.login(this.usuario).subscribe(
         (response) => {
