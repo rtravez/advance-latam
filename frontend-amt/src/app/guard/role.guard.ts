@@ -30,10 +30,12 @@ export class RoleGuard implements CanActivate {
       return false;
     }
 
-    let role = next.data['role'] as string;
+    const role = next.data['role'] as string[];
     console.log(role);
-    if (this.authService.hasRole(role)) {
-      return true;
+    for (let r of role) {
+      if (this.authService.hasRole(r)) {
+        return true;
+      }
     }
     Swal.fire(
       'Acceso denegado',

@@ -1,8 +1,8 @@
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
-import {IGeneric} from './igeneric.interface';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { IGeneric } from './igeneric.interface';
 
 export abstract class GenericService<T, ID> implements IGeneric<T, ID> {
   protected constructor(
@@ -40,6 +40,7 @@ export abstract class GenericService<T, ID> implements IGeneric<T, ID> {
   findById(id: ID): Observable<T> {
     return this.http.get<T>(`${this.base}/${id}`).pipe(
       catchError((e) => {
+        
         if (e.status === 404) {
           return throwError(e);
         }
@@ -51,6 +52,7 @@ export abstract class GenericService<T, ID> implements IGeneric<T, ID> {
   findAll(): Observable<T[]> {
     return this.http.get<T[]>(`${this.base}`).pipe(
       catchError((e) => {
+        console.log(e.error.mensaje);
         if (e.status === 404) {
           return throwError(e);
         }

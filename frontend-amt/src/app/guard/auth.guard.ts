@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import {
   Router,
@@ -7,14 +7,15 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import {Observable} from 'rxjs';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -37,10 +38,10 @@ export class AuthGuard implements CanActivate {
   }
 
   isTokenExpirado(): boolean {
-    let token = this.authService.getToken;
-    let payload = this.authService.obtenerToken(token);
+    const token = this.authService.getToken;
+    const payload = this.authService.obtenerToken(token);
     console.log(payload.exp);
-    let now = new Date().getTime() / 1000;
+    const now = new Date().getTime() / 1000;
     if (payload.exp < now) {
       return true;
     }
