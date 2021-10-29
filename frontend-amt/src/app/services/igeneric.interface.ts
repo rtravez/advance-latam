@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export interface Igeneric<T, ID> {
+export interface IGeneric<T, ID> {
   save(t: T): Observable<T>;
   update(id: ID, t: T): Observable<T>;
   findById(id: ID): Observable<T>;

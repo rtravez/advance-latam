@@ -1,11 +1,11 @@
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { Igeneric } from './igeneric.interface';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {IGeneric} from './igeneric.interface';
 
-export abstract class GenericService<T, ID> implements Igeneric<T, ID> {
-  constructor(
+export abstract class GenericService<T, ID> implements IGeneric<T, ID> {
+  protected constructor(
     protected http: HttpClient,
     protected router: Router,
     protected base: string
@@ -25,7 +25,7 @@ export abstract class GenericService<T, ID> implements Igeneric<T, ID> {
   }
 
   update(id: ID, t: T): Observable<T> {
-    //return this.http.put<T>(this.base + '/' + id, t, {});
+    // return this.http.put<T>(this.base + '/' + id, t, {});
     return this.http.put<T>(`${this.base}/${id}`, t).pipe(
       catchError((e) => {
         if (e.status === 400) {

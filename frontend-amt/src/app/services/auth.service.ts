@@ -1,13 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Usuario } from '../models/usuario';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {Usuario} from '../models/usuario';
+import {GenericService} from './generic.service';
+import {Router} from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  private url = `${environment.api.baseTokenUrl}`;
+export class AuthService extends GenericService<Usuario, number> {
   private usuario: Usuario;
   private token: string;
   private credenciales = btoa('frontend-amt' + ':' + 'frontend-amt');
@@ -17,14 +19,16 @@ export class AuthService {
     Authorization: 'Basic ' + this.credenciales,
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(protected http: HttpClient, protected router: Router) {
+    super(http, router, `${environment.api.baseTokenUrl}`);
+  }
 
   public login(usuario: Usuario): Observable<any> {
     this.params.set('grant_type', 'password');
     this.params.set('username', usuario.username);
     this.params.set('password', usuario.password);
     //  console.log(this.params.toString());
-    return this.http.post(this.url, this.params.toString(), {
+    return this.http.post(this.base, this.params.toString(), {
       headers: this.httpHeaders,
     });
   }
@@ -39,6 +43,7 @@ export class AuthService {
     this.usuario.roles = payload.authorities;
     sessionStorage.setItem('usuario', JSON.stringify(this.usuario));
   }
+
   public guardarToken(accessToken: string): void {
     this.token = accessToken;
     sessionStorage.setItem('token', this.token);
