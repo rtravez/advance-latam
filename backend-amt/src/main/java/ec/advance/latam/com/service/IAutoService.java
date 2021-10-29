@@ -10,6 +10,6 @@ public interface IAutoService extends IGenericService<Auto, Long>, Serializable 
 
 	public Optional<Auto> findAutoByPlaca(String placa) throws ExceptionManager;
 
-	public boolean validarHoyNoCircula(String placa, String fecha) throws ExceptionManager;
+	public boolean findHoyNoCircula(String placa, String fecha) throws ExceptionManager;
 
 }

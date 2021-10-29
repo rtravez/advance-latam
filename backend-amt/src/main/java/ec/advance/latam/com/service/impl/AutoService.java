@@ -73,7 +73,7 @@ public class AutoService extends GenericService<Auto, Long> implements IAutoServ
 
 	@Override
 	@Transactional(readOnly = true)
-	public boolean validarHoyNoCircula(String placa, String fecha) throws ExceptionManager {
+	public boolean findHoyNoCircula(String placa, String fecha) throws ExceptionManager {
 		try {
 			String ultimoDigito;
 			Date f = Utilities.convertirDateStringToDate(fecha, Constantes.FORMATO_FECHA);
