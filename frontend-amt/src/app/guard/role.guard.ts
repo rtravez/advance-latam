@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 import {
   Router,
@@ -7,15 +7,16 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import Swal from 'sweetalert2';
-import { AuthService } from '../services/auth.service';
+import {AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoleGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -32,7 +33,7 @@ export class RoleGuard implements CanActivate {
 
     const role = next.data['role'] as string[];
     console.log(role);
-    for (let r of role) {
+    for (const r of role) {
       if (this.authService.hasRole(r)) {
         return true;
       }
