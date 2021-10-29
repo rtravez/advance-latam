@@ -1,7 +1,6 @@
 package ec.advance.latam.com.service.impl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -9,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import ec.advance.latam.com.dao.IAutoDao;
@@ -42,56 +42,7 @@ public class AutoService extends GenericService<Auto, Long> implements IAutoServ
 	}
 
 	@Override
-	//@Transactional(readOnly = true)
-	public List<Auto> findAll() throws ExceptionManager {
-		try {
-			return super.findAll();
-		} catch (Exception e) {
-			LOG.error("findAll: ", e);
-			throw new ExceptionManager().new FindingException("Error al buscar los registros");
-		}
-	}
-
-	@Override
-	// @Transactional(readOnly = true)
-	public boolean existsById(Long id) throws ExceptionManager {
-		try {
-			return super.existsById(id);
-		} catch (Exception e) {
-			LOG.error("existsById: ", e);
-			throw new ExceptionManager().new FindingException("Error al buscar el registro");
-		}
-
-	}
-
-	@Override
-	// @Transactional(readOnly = true)
-	public Optional<Auto> findById(Long id) throws ExceptionManager {
-		try {
-			return super.findById(id);
-		} catch (Exception e) {
-			LOG.error("findById: ", e);
-			throw new ExceptionManager().new FindingException("Error al buscar el registro");
-		}
-
-	}
-
-	@Override
-	// @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	// rollbackFor = ExceptionManager.class)
-	public void delete(Auto auto) throws ExceptionManager {
-		try {
-			super.delete(auto);
-		} catch (Exception e) {
-			LOG.error("delete: ", e);
-			throw new ExceptionManager().new GettingException("Error al eliminar el registro");
-		}
-
-	}
-
-	@Override
-	// @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	// rollbackFor = ExceptionManager.class)
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
 	public Auto save(Auto auto) throws ExceptionManager {
 		try {
 			if (autoDao.findAutoByPlaca(auto.getPlaca()).isPresent())
@@ -126,16 +77,12 @@ public class AutoService extends GenericService<Auto, Long> implements IAutoServ
 		try {
 			String ultimoDigito;
 			Date f = Utilities.convertirDateStringToDate(fecha, Constantes.FORMATO_FECHA);
-			Date fa = Utilities.convertirDateStringToDate(
-					Utilities.convertirDateToDateString(new Date(), Constantes.FORMATO_FECHA),
-					Constantes.FORMATO_FECHA);
+			Date fa = Utilities.convertirDateStringToDate(Utilities.convertirDateToDateString(new Date(), Constantes.FORMATO_FECHA), Constantes.FORMATO_FECHA);
 
 			if (f.getTime() < fa.getTime())
-				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: "
-						+ Utilities.convertirDateToDateString(fa, Constantes.FORMATO_FECHA));
+				throw new ExceptionManager().new GettingException("La fecha no puede ser menor a la fecha actual: " + Utilities.convertirDateToDateString(fa, Constantes.FORMATO_FECHA));
 
-			Optional<Restriccion> restriccion = restriccionDao
-					.findRestriccionByValorEntero(Long.valueOf(Utilities.dayOfWeek(f)));
+			Optional<Restriccion> restriccion = restriccionDao.findRestriccionByValorEntero(Long.valueOf(Utilities.dayOfWeek(f)));
 
 			if (restriccion.isPresent()) {
 				String diasNocircula[] = restriccion.get().getValorCadena().split(",");
@@ -144,16 +91,14 @@ public class AutoService extends GenericService<Auto, Long> implements IAutoServ
 						ultimoDigito = placa.substring(6, 7);
 						for (int x = 0; x < diasNocircula.length; x++) {
 							if (diasNocircula[x].equals(ultimoDigito)) {
-								throw new ExceptionManager().new GettingException("El auto con placa " + placa
-										+ " no puede circular por su ultimo digito verificador " + ultimoDigito);
+								throw new ExceptionManager().new GettingException("El auto con placa " + placa + " no puede circular por su ultimo digito verificador " + ultimoDigito);
 							}
 						}
 					} else if (placa.trim().length() == Constantes.FORMATO_PLACA8) {
 						ultimoDigito = placa.substring(7, 8);
 						for (int x = 0; x < diasNocircula.length; x++) {
 							if (diasNocircula[x].equals(ultimoDigito)) {
-								throw new ExceptionManager().new GettingException("El auto con placa " + placa
-										+ " no puede circular por su ultimo digito verificador " + ultimoDigito);
+								throw new ExceptionManager().new GettingException("El auto con placa " + placa + " no puede circular por su ultimo digito verificador " + ultimoDigito);
 							}
 						}
 					} else {

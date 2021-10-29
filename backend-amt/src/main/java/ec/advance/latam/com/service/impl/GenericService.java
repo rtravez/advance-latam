@@ -149,15 +149,4 @@ public class GenericService<T, ID extends Serializable> implements IGenericServi
 			throw new ExceptionManager().new GettingException("Error al eliminar los registros");
 		}
 	}
-
-	@Override
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
-	public void deleteAll() throws ExceptionManager {
-		try {
-			genericDao.deleteAll();
-		} catch (Exception e) {
-			LOG.error("deleteAll: ", e);
-			throw new ExceptionManager().new GettingException("Error al eliminar los registros");
-		}
-	}
 }

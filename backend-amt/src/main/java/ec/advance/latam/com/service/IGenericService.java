@@ -29,6 +29,4 @@ public interface IGenericService<T, ID extends Serializable> {
 	public void deleteAllById(List<ID> ids) throws ExceptionManager;
 
 	public void deleteAll(List<T> entities) throws ExceptionManager;
-
-	public void deleteAll() throws ExceptionManager;
 }

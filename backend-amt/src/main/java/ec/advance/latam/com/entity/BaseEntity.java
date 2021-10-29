@@ -9,7 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @MappedSuperclass
-//@EntityListeners({ EntityAuditorListenerAS2.class })
+// @EntityListeners({ EntityAuditorListenerAS2.class })
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;

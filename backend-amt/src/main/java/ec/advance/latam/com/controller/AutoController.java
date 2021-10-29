@@ -78,9 +78,7 @@ public class AutoController {
 		response = new HashMap<>();
 		try {
 			if (result.hasErrors()) {
-				List<String> errors = result.getFieldErrors().stream()
-						.map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage())
-						.collect(Collectors.toList());
+				List<String> errors = result.getFieldErrors().stream().map(err -> "El campo '" + err.getField() + "' " + err.getDefaultMessage()).collect(Collectors.toList());
 				response.put("errors", errors);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
