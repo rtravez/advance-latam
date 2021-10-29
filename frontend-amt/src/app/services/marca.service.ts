@@ -18,7 +18,7 @@ export class MarcaService extends GenericService<Marca, number> {
   findMarcaByTipo(tipo: number): Observable<Marca[]> {
     return this.http.get<Marca[]>(`${this.base}/${tipo}`).pipe(
       catchError((e) => {
-        if (e.status != 401 && e.error.mensaje) {
+        if (e.status !== 401 && e.error.mensaje) {
           this.router.navigate(['/auto']);
           console.error(e.error.mensaje);
         }

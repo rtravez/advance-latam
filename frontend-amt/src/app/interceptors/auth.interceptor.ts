@@ -18,14 +18,14 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((e) => {
-        if (e.status == 401) {
+        if (e.status === 401) {
           if (this.authService.isAuthenticated()) {
             this.authService.logout();
           }
           this.router.navigate(['/login']);
         }
 
-        if (e.status == 403) {
+        if (e.status === 403) {
           Swal.fire(
             'Acceso denegado',
             `Hola ${this.authService.getUsuario.username} no tienes acceso a este recurso!`,
