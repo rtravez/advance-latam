@@ -30,7 +30,7 @@ import ec.advance.latam.com.service.IUsuarioService;
  */
 @Scope("singleton")
 @Service("UsuarioService")
-public class UsuarioService implements IUsuarioService {
+public class UsuarioService extends GenericService<Usuario, Long> implements IUsuarioService {
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = LoggerFactory.getLogger(UsuarioService.class);
@@ -67,7 +67,7 @@ public class UsuarioService implements IUsuarioService {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = ExceptionManager.class)
 	public Usuario save(Usuario usuario) throws ExceptionManager {
 		try {
-			return usuarioDao.save(usuario);
+			return super.save(usuario);
 		} catch (Exception e) {
 			LOG.error("save: ", e);
 			throw new ExceptionManager().new GettingException("Error al guardar el registro");

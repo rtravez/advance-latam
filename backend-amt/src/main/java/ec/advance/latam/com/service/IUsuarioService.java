@@ -14,9 +14,7 @@ import ec.advance.latam.com.exception.ExceptionManager;
  * @author renetravez
  * @version $1.0$
  */
-public interface IUsuarioService extends Serializable, UserDetailsService {
+public interface IUsuarioService extends IGenericService<Usuario, Long>,UserDetailsService, Serializable {
 
-	public Optional<Usuario> findByUsername(String username);
-
-	public Usuario save(Usuario usuario) throws ExceptionManager;
+	public Optional<Usuario> findByUsername(String username) throws ExceptionManager;	
 }
