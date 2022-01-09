@@ -40,7 +40,7 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = usuarioDao.findByUsername(username).orElse(null);
+		Usuario usuario = findByUsername(username).orElse(null);
 
 		if (usuario == null) {
 			LOG.error("Error en el Login: no existe el usuario '" + username + "' en el sistema!");
