@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.8</version>	
+		<version>2.5.8</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ec.advance.latam.com</groupId>
@@ -52,12 +52,17 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.postgresql</groupId> -->
-<!-- 			<artifactId>postgresql</artifactId> -->
-<!-- 			<scope>runtime</scope> -->
-<!-- 		</dependency> -->
-<dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
@@ -130,8 +135,8 @@
 					<compilerArgs>
 						<arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
 						<arg>-Amapstruct.defaultComponentModel=spring</arg>
-<!-- 						<arg>-Amapstruct.suppressGeneratorVersionInfoComment=true</arg> -->
-<!-- 						<arg>-Amapstruct.verbose=true</arg> -->
+						<!-- <arg>-Amapstruct.suppressGeneratorVersionInfoComment=true</arg> -->
+						<!-- <arg>-Amapstruct.verbose=true</arg> -->
 					</compilerArgs>
 				</configuration>
 			</plugin>
