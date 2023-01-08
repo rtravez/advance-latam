@@ -6,8 +6,8 @@
 `CREATE DATABASE amt`
 #
 Verificar que la base de datos este corriendo por el puerto por defecto `5432`.
-El usuario por defecto de la base es postgres 
-La contraseña es: admin
+El usuario por defecto de la base es `postgres`
+La contraseña es: `admin`
 
 Si prefiere cambiar las configuraciones en el archivo `application.properties `
 
